@@ -3,6 +3,7 @@ import { position as positionGps } from '../../src/lib/pwa/gps.js';
 import { demarrerScan } from '../../src/lib/pwa/qr-scan.js';
 import { compresserPhoto } from '../../src/lib/pwa/photo.js';
 import { creerPadSignature } from '../../src/lib/pwa/signature.js';
+import { icone } from '../../src/lib/icons.js';
 
 const LIBELLES_MOTIF = { rupture: 'Rupture de stock', refus: 'Client refuse', ferme: 'Point fermé', dlc: 'DLC dépassée' };
 
@@ -36,7 +37,7 @@ function dessinerArrivee(conteneur, etat, naviguer, visite) {
       <video id="video-scan" class="camera-scan" playsinline muted style="display:none;"></video>
       <canvas id="canvas-scan" style="display:none;"></canvas>
       <div id="zone-message"></div>
-      <button class="gros-bouton gros-bouton-orange" id="btn-scanner">📷 Scanner le QR du client</button>
+      <button class="gros-bouton gros-bouton-orange" id="btn-scanner">${icone('camera', 22)}Scanner le QR du client</button>
       <button class="gros-bouton gros-bouton-blanc" id="btn-manuel">Saisie manuelle (QR illisible)</button>
     </div>
   `;

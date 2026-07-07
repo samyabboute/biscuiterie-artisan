@@ -22,6 +22,11 @@
       padding: var(--espace-7) var(--espace-6);
     }
     .connexion-logo { text-align: center; margin-bottom: var(--espace-6); }
+    .connexion-logo-marque {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 52px; height: 52px; border-radius: 15px; background: var(--orange); color: #fff;
+      box-shadow: 0 6px 14px rgba(197, 90, 17, 0.3); margin-bottom: var(--espace-3);
+    }
     .connexion-logo .nom { display: block; font-size: 1.6rem; font-weight: 800; color: var(--bleu-fonce); }
     .connexion-logo .sous { display: block; font-size: 0.8rem; color: var(--texte-attenue); letter-spacing: 0.08em; text-transform: uppercase; }
     .connexion-carte .bouton { width: 100%; margin-top: var(--espace-2); }
@@ -31,6 +36,9 @@
 <body>
   <form class="connexion-carte" id="formulaire-connexion" autocomplete="off">
     <div class="connexion-logo">
+      <div class="connexion-logo-marque">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7.5 12 3 3 7.5l9 4.5 9-4.5Z"/><path d="M3 7.5v9l9 4.5 9-4.5v-9"/><path d="M12 12v9"/></svg>
+      </div>
       <span class="nom">L'Artisan</span>
       <span class="sous">Espace interne</span>
     </div>

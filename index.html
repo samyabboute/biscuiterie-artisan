@@ -16,6 +16,11 @@
       color: var(--texte-inverse);
     }
     .vitrine { max-width: 560px; padding: var(--espace-6); }
+    .vitrine-marque {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 64px; height: 64px; border-radius: 18px; background: var(--orange); color: #fff;
+      box-shadow: 0 8px 20px rgba(197, 90, 17, 0.35); margin-bottom: var(--espace-4);
+    }
     .vitrine .nom { font-size: 2.6rem; font-weight: 800; letter-spacing: 0.02em; }
     .vitrine .trait { width: 64px; height: 4px; background: var(--orange); margin: var(--espace-4) auto; border-radius: 2px; }
     .vitrine p { color: #C6D0E6; font-size: 1.05rem; }
@@ -23,6 +28,9 @@
 </head>
 <body>
   <div class="vitrine">
+    <div class="vitrine-marque">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7.5 12 3 3 7.5l9 4.5 9-4.5Z"/><path d="M3 7.5v9l9 4.5 9-4.5v-9"/><path d="M12 12v9"/></svg>
+    </div>
     <div class="nom">L'Artisan</div>
     <div class="trait"></div>
     <p>Biscuiterie artisanale — gestion de la distribution et des livraisons.</p>

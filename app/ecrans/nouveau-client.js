@@ -1,5 +1,6 @@
 import * as bd from '../../src/lib/pwa/db.js';
 import { position as positionGps } from '../../src/lib/pwa/gps.js';
+import { icone } from '../../src/lib/icons.js';
 
 const LIBELLES_TYPE = { GRO: 'Grossiste', SUP: 'Supérette', GMS: 'Grande surface', DET: 'Détaillant', CAF: 'Café / kiosque' };
 
@@ -19,7 +20,7 @@ async function rendre(conteneur, { etat, naviguer, contexte }) {
       <div class="champ-app"><label>Commune *</label><input id="commune" required /></div>
       <div class="champ-app"><label>Adresse</label><input id="adresse" /></div>
       <div id="zone-gps" class="carte-app">Position GPS non capturée.</div>
-      <button type="button" class="gros-bouton gros-bouton-blanc" id="btn-gps">📍 Capturer la position GPS</button>
+      <button type="button" class="gros-bouton gros-bouton-blanc" id="btn-gps">${icone('mapPin', 22)}Capturer la position GPS</button>
       <button type="button" class="gros-bouton gros-bouton-orange" id="btn-enregistrer">Enregistrer le client</button>
     </div>
   `;

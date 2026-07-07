@@ -1,4 +1,5 @@
 import { deconnecter } from './auth.js';
+import { icone } from './icons.js';
 
 const ROLE_LABELS = {
   super_admin: 'Super Admin',
@@ -14,29 +15,29 @@ const ROLE_LABELS = {
 // Modules du CRM et rôles autorisés à les voir (cf. tableau de permissions).
 // `disponible: false` = module pas encore construit (affiché grisé, phases suivantes).
 const MODULES = [
-  { id: 'accueil', label: 'Accueil', icone: '🏠', href: 'management/index.html',
+  { id: 'accueil', label: 'Accueil', icone: 'home', href: 'management/index.html',
     roles: ['super_admin', 'directeur_commercial', 'resp_logistique', 'superviseur_zone', 'agent_adv', 'comptable', 'magasinier'], disponible: true },
-  { id: 'carte', label: 'Carte', icone: '🗺️', href: 'management/carte.html',
+  { id: 'carte', label: 'Carte', icone: 'map', href: 'management/carte.html',
     roles: ['super_admin', 'directeur_commercial', 'resp_logistique', 'superviseur_zone'], disponible: true },
-  { id: 'clients', label: 'Clients', icone: '🏬', href: 'management/clients.html',
+  { id: 'clients', label: 'Clients', icone: 'store', href: 'management/clients.html',
     roles: ['super_admin', 'directeur_commercial', 'resp_logistique', 'superviseur_zone', 'agent_adv', 'comptable'], disponible: true },
-  { id: 'commandes', label: 'Commandes', icone: '📦', href: 'management/commandes.html',
+  { id: 'commandes', label: 'Commandes', icone: 'package', href: 'management/commandes.html',
     roles: ['super_admin', 'directeur_commercial', 'resp_logistique', 'superviseur_zone', 'agent_adv'], disponible: true },
-  { id: 'tournees', label: 'Tournées & livraisons', icone: '🚚', href: 'management/tournees.html',
+  { id: 'tournees', label: 'Tournées & livraisons', icone: 'truck', href: 'management/tournees.html',
     roles: ['super_admin', 'resp_logistique', 'superviseur_zone', 'magasinier'], disponible: true },
-  { id: 'retours', label: 'Retours produits', icone: '↩️', href: 'management/retours.html',
+  { id: 'retours', label: 'Retours produits', icone: 'rotateLeft', href: 'management/retours.html',
     roles: ['super_admin', 'comptable', 'resp_logistique', 'agent_adv', 'superviseur_zone'], disponible: true },
-  { id: 'encaissements', label: 'Encaissements', icone: '💰', href: 'management/encaissements.html',
+  { id: 'encaissements', label: 'Encaissements', icone: 'wallet', href: 'management/encaissements.html',
     roles: ['super_admin', 'comptable'], disponible: true },
-  { id: 'distribution', label: 'App Distribution', icone: '📲', href: 'management/distribution.html',
+  { id: 'distribution', label: 'App Distribution', icone: 'smartphone', href: 'management/distribution.html',
     roles: ['super_admin', 'resp_logistique'], disponible: true },
-  { id: 'produits', label: 'Produits', icone: '🍪', href: 'management/produits.html',
+  { id: 'produits', label: 'Produits', icone: 'package', href: 'management/produits.html',
     roles: ['super_admin', 'directeur_commercial'], disponible: true },
-  { id: 'utilisateurs', label: 'Utilisateurs & accès', icone: '👥', href: 'management/utilisateurs.html',
+  { id: 'utilisateurs', label: 'Utilisateurs & accès', icone: 'users', href: 'management/utilisateurs.html',
     roles: ['super_admin'], disponible: true },
-  { id: 'archives', label: 'Archives', icone: '🗄️', href: 'management/archives.html',
+  { id: 'archives', label: 'Archives', icone: 'archive', href: 'management/archives.html',
     roles: ['super_admin'], disponible: true },
-  { id: 'audit', label: "Journal d'audit", icone: '📜', href: 'management/audit.html',
+  { id: 'audit', label: "Journal d'audit", icone: 'fileText', href: 'management/audit.html',
     roles: ['super_admin'], disponible: true },
 ];
 
@@ -46,8 +47,11 @@ export function construireShell({ profil, moduleActifId }) {
   racine.innerHTML = `
     <aside class="shell-barre-laterale">
       <div class="shell-logo">
-        <span class="shell-logo-nom">L'Artisan</span>
-        <span class="shell-logo-sous">Biscuiterie</span>
+        <span class="shell-logo-marque">${icone('package', 22)}</span>
+        <span class="shell-logo-texte">
+          <span class="shell-logo-nom">L'Artisan</span>
+          <span class="shell-logo-sous">Biscuiterie</span>
+        </span>
       </div>
       <nav class="shell-nav"></nav>
     </aside>
@@ -55,11 +59,12 @@ export function construireShell({ profil, moduleActifId }) {
       <header class="shell-entete">
         <div class="shell-entete-titre"></div>
         <div class="shell-entete-profil">
+          <div class="shell-profil-avatar">${(profil.prenom?.[0] || '') + (profil.nom?.[0] || '')}</div>
           <div class="shell-profil-info">
             <span class="shell-profil-nom">${profil.prenom} ${profil.nom}</span>
             <span class="shell-profil-role">${profil.matricule} · ${ROLE_LABELS[profil.role] || profil.role}</span>
           </div>
-          <button type="button" class="bouton bouton-secondaire" id="bouton-deconnexion">Déconnexion</button>
+          <button type="button" class="bouton bouton-secondaire bouton-icone-texte" id="bouton-deconnexion">${icone('logout', 16)}<span>Déconnexion</span></button>
         </div>
       </header>
       <main class="shell-contenu" id="shell-contenu"></main>
@@ -76,7 +81,7 @@ export function construireShell({ profil, moduleActifId }) {
     if (mod.id === moduleActifId) lien.classList.add('actif');
     if (!mod.disponible) lien.classList.add('desactive');
 
-    lien.innerHTML = `<span class="shell-nav-icone">${mod.icone}</span><span>${mod.label}</span>${mod.disponible ? '' : '<span class="badge badge-gris">Bientôt</span>'}`;
+    lien.innerHTML = `<span class="shell-nav-icone">${icone(mod.icone, 19)}</span><span>${mod.label}</span>${mod.disponible ? '' : '<span class="badge badge-gris">Bientôt</span>'}`;
     nav.appendChild(lien);
   }
 

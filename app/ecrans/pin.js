@@ -1,4 +1,5 @@
 import { configurerPin, verifierPin } from '../../src/lib/pwa/crypto.js';
+import { icone } from '../../src/lib/icons.js';
 
 const LONGUEUR_PIN = 4;
 
@@ -12,7 +13,7 @@ function rendre(conteneur, { contexte }) {
   function dessiner(titre, sousTitre, messageErreur) {
     conteneur.innerHTML = `
       <div class="ecran" style="justify-content:center; align-items:center; text-align:center;">
-        <div style="font-size:1.6rem; font-weight:900; color:var(--bleu-fonce);">🔒</div>
+        <div class="pin-icone-verrou">${icone('lock', 30)}</div>
         <h2 style="margin:8px 0 2px;">${titre}</h2>
         <p class="sous-titre">${sousTitre}</p>
         ${messageErreur ? `<div class="message-erreur">${messageErreur}</div>` : ''}

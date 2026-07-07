@@ -3,6 +3,7 @@ import { matriculeVersEmail, matriculeValide } from '../src/lib/auth.js';
 import * as bd from '../src/lib/pwa/db.js';
 import { pinDejaConfigure, configurerPin, verifierPin } from '../src/lib/pwa/crypto.js';
 import { synchroniser } from '../src/lib/pwa/sync.js';
+import { icone } from '../src/lib/icons.js';
 
 import ecranConnexion from './ecrans/connexion.js';
 import ecranPin from './ecrans/pin.js';
@@ -82,17 +83,17 @@ function afficherEcran(module, params = {}, routeActive = null) {
 
 function afficherNavigation(routeActive) {
   const items = [
-    { id: 'tournee', icone: '🚚', label: 'Tournée' },
-    { id: 'nouvelle-commande', icone: '📦', label: 'Commande' },
-    { id: 'nouveau-client', icone: '🏬', label: 'Client' },
-    { id: 'incidents', icone: '⚠️', label: 'Incident' },
-    { id: 'fin-journee', icone: '🌙', label: 'Fin journée' },
+    { id: 'tournee', icone: 'truck', label: 'Tournée' },
+    { id: 'nouvelle-commande', icone: 'package', label: 'Commande' },
+    { id: 'nouveau-client', icone: 'store', label: 'Client' },
+    { id: 'incidents', icone: 'alertTriangle', label: 'Incident' },
+    { id: 'fin-journee', icone: 'moon', label: 'Fin journée' },
   ];
   const nav = document.createElement('nav');
   nav.className = 'pastille-navigation';
   nav.innerHTML = items.map((it) => `
     <button type="button" data-route="${it.id}" class="${routeActive === it.id ? 'actif' : ''}">
-      <span class="icone">${it.icone}</span><span>${it.label}</span>
+      <span class="icone">${icone(it.icone, 22)}</span><span>${it.label}</span>
     </button>
   `).join('');
   nav.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => naviguer(b.dataset.route)));
