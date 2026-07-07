@@ -1,0 +1,18 @@
+.liste-arrets { display: flex; flex-direction: column; gap: 6px; margin-bottom: var(--espace-4); }
+.arret-item {
+  display: flex; align-items: center; gap: var(--espace-3);
+  background: var(--fond); border: 1px solid var(--bordure); border-radius: var(--rayon-petit);
+  padding: var(--espace-2) var(--espace-3); cursor: grab;
+}
+.arret-item.en-glissement { opacity: 0.4; }
+.arret-item .poignee { color: var(--texte-attenue); }
+.arret-item .ordre { font-weight: 800; color: var(--bleu-fonce); width: 22px; }
+.arret-item .infos { flex: 1; }
+.arret-item .infos .nom { font-weight: 600; }
+.arret-item .infos .sous { font-size: 0.78rem; color: var(--texte-attenue); }
+
+.liste-choix-commandes { max-height: 260px; overflow-y: auto; border: 1px solid var(--bordure); border-radius: var(--rayon-petit); padding: var(--espace-2); margin-bottom: var(--espace-4); }
+.choix-commande { display: flex; align-items: center; gap: var(--espace-2); padding: var(--espace-2); border-bottom: 1px solid var(--bordure); }
+.choix-commande:last-child { border-bottom: none; }
+
+.editeur-lignes-simple { display: flex; gap: var(--espace-2); margin-bottom: var(--espace-3); }

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biscuiterie L'Artisan</title>
+  <link rel="stylesheet" href="/src/styles/base.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 20% 20%, var(--bleu-fonce-clair), var(--bleu-fonce-fonce) 70%);
+      text-align: center;
+      color: var(--texte-inverse);
+    }
+    .vitrine { max-width: 560px; padding: var(--espace-6); }
+    .vitrine .nom { font-size: 2.6rem; font-weight: 800; letter-spacing: 0.02em; }
+    .vitrine .trait { width: 64px; height: 4px; background: var(--orange); margin: var(--espace-4) auto; border-radius: 2px; }
+    .vitrine p { color: #C6D0E6; font-size: 1.05rem; }
+  </style>
+</head>
+<body>
+  <div class="vitrine">
+    <div class="nom">L'Artisan</div>
+    <div class="trait"></div>
+    <p>Biscuiterie artisanale — gestion de la distribution et des livraisons.</p>
+  </div>
+</body>
+</html>

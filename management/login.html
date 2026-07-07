@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion — Biscuiterie L'Artisan</title>
+  <link rel="stylesheet" href="/src/styles/base.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, var(--bleu-fonce) 0%, var(--bleu-fonce-fonce) 100%);
+    }
+    .connexion-carte {
+      width: 100%;
+      max-width: 380px;
+      background: var(--surface);
+      border-radius: 14px;
+      box-shadow: var(--ombre-forte);
+      padding: var(--espace-7) var(--espace-6);
+    }
+    .connexion-logo { text-align: center; margin-bottom: var(--espace-6); }
+    .connexion-logo .nom { display: block; font-size: 1.6rem; font-weight: 800; color: var(--bleu-fonce); }
+    .connexion-logo .sous { display: block; font-size: 0.8rem; color: var(--texte-attenue); letter-spacing: 0.08em; text-transform: uppercase; }
+    .connexion-carte .bouton { width: 100%; margin-top: var(--espace-2); }
+    #matricule { text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <form class="connexion-carte" id="formulaire-connexion" autocomplete="off">
+    <div class="connexion-logo">
+      <span class="nom">L'Artisan</span>
+      <span class="sous">Espace interne</span>
+    </div>
+
+    <div id="zone-message"></div>
+
+    <div class="champ">
+      <label for="matricule">Matricule</label>
+      <input type="text" id="matricule" name="matricule" placeholder="ART-LOG-0027" required />
+    </div>
+
+    <div class="champ">
+      <label for="mot-de-passe">Mot de passe</label>
+      <input type="password" id="mot-de-passe" name="mot-de-passe" required />
+    </div>
+
+    <button type="submit" class="bouton bouton-primaire" id="bouton-connexion">Se connecter</button>
+  </form>
+
+  <script type="module" src="/management/login.js"></script>
+</body>
+</html>

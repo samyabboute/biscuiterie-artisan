@@ -1,0 +1,16 @@
+.grille-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espace-4); margin-bottom: var(--espace-5); }
+.carte.kpi { text-align: center; }
+.kpi-valeur { font-size: 1.6rem; font-weight: 800; color: var(--bleu-fonce); }
+.kpi-libelle { color: var(--texte-attenue); font-size: 0.85rem; margin-top: 4px; }
+
+.grille-deux { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espace-4); margin-bottom: var(--espace-4); }
+.grille-deux .carte h3 { margin-top: 0; }
+
+.pastille-dashboard { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.pastille-dashboard.pastille-vert { background: var(--succes); }
+.pastille-dashboard.pastille-orange { background: var(--alerte); }
+.pastille-dashboard.pastille-rouge { background: var(--danger); }
+
+@media (max-width: 900px) {
+  .grille-deux { grid-template-columns: 1fr; }
+}

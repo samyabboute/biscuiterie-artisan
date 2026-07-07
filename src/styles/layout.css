@@ -1,0 +1,65 @@
+@import './base.css';
+
+.shell {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+.shell-barre-laterale {
+  background: var(--bleu-fonce-fonce);
+  color: var(--texte-inverse);
+  padding: var(--espace-5) var(--espace-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-5);
+}
+
+.shell-logo { display: flex; flex-direction: column; padding: 0 var(--espace-3); }
+.shell-logo-nom { font-size: 1.3rem; font-weight: 800; color: var(--texte-inverse); }
+.shell-logo-sous { font-size: 0.75rem; color: #A9B6D6; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.shell-nav { display: flex; flex-direction: column; gap: 2px; }
+
+.shell-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  padding: var(--espace-3);
+  border-radius: var(--rayon-petit);
+  color: #D7DEEC;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.shell-nav-item:hover { background: rgba(255,255,255,0.08); color: var(--texte-inverse); }
+.shell-nav-item.actif { background: var(--orange); color: var(--texte-inverse); font-weight: 700; }
+.shell-nav-item.desactive { opacity: 0.45; cursor: default; pointer-events: none; justify-content: space-between; }
+.shell-nav-icone { font-size: 1.05rem; }
+
+.shell-corps { display: flex; flex-direction: column; min-width: 0; }
+
+.shell-entete {
+  background: var(--surface);
+  border-bottom: 1px solid var(--bordure);
+  padding: var(--espace-4) var(--espace-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.shell-entete-titre h1 { margin: 0; font-size: 1.3rem; }
+
+.shell-entete-profil { display: flex; align-items: center; gap: var(--espace-4); }
+.shell-profil-info { display: flex; flex-direction: column; align-items: flex-end; }
+.shell-profil-nom { font-weight: 700; font-size: 0.9rem; }
+.shell-profil-role { font-size: 0.78rem; color: var(--texte-attenue); }
+
+.shell-contenu { padding: var(--espace-6); flex: 1; }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+  .shell-barre-laterale { flex-direction: row; align-items: center; overflow-x: auto; padding: var(--espace-3); }
+  .shell-nav { flex-direction: row; }
+  .shell-logo { display: none; }
+}

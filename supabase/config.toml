@@ -1,0 +1,42 @@
+project_id = "biscuiterie-artisan"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage"]
+extra_search_path = ["public"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 17
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed/seed_demo.sql"]
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://localhost:5173"]
+jwt_expiry = 3600
+enable_signup = false
+
+[auth.email]
+enable_confirmations = false
+
+[storage]
+enabled = true
+file_size_limit = "10MiB"
+
+[storage.buckets.preuves]
+public = false
+file_size_limit = "5MiB"
+
+[storage.buckets.etiquettes]
+public = false
+file_size_limit = "5MiB"

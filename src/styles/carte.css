@@ -1,0 +1,41 @@
+#carte-conteneur { position: absolute; inset: 0; }
+
+.carte-barre-filtres {
+  position: absolute; top: 12px; left: 12px; right: 12px; z-index: 1000;
+  display: flex; gap: 8px; flex-wrap: wrap;
+  background: var(--surface); border-radius: var(--rayon);
+  padding: var(--espace-3); box-shadow: var(--ombre);
+}
+.carte-barre-filtres select, .carte-barre-filtres input { padding: 6px 10px; border: 1px solid var(--bordure); border-radius: var(--rayon-petit); }
+
+.carte-legende {
+  position: absolute; bottom: 20px; left: 12px; z-index: 1000;
+  background: var(--surface); border-radius: var(--rayon-petit); padding: 8px 12px;
+  box-shadow: var(--ombre); font-size: 0.8rem; display: flex; gap: 12px;
+}
+.carte-legende span { display: inline-flex; align-items: center; gap: 4px; }
+.carte-legende .pastille { width: 10px; height: 10px; border-radius: 50%; }
+
+.marqueur-pulse { width: 16px; height: 16px; border-radius: 50%; position: relative; border: 2px solid #fff; box-shadow: 0 0 4px rgba(0,0,0,0.4); }
+.marqueur-pulse::after {
+  content: ''; position: absolute; inset: -6px; border-radius: 50%; background: inherit;
+  opacity: 0.55; animation: pulse-carte 1.6s ease-out infinite;
+}
+@keyframes pulse-carte { 0% { transform: scale(0.5); opacity: 0.6; } 100% { transform: scale(2); opacity: 0; } }
+.marqueur-orange { background: #C55A11; }
+.marqueur-bleu { background: #1F3864; }
+.marqueur-vert { background: #2E7D46; }
+.marqueur-rouge { background: #B3261E; }
+
+.marqueur-cluster {
+  background: var(--bleu-fonce); color: #fff; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.8rem; border: 2px solid #fff; box-shadow: 0 0 4px rgba(0,0,0,0.4);
+}
+
+.panneau-laterale-carte {
+  position: absolute; top: 0; right: 0; bottom: 0; width: 340px; max-width: 90vw;
+  background: var(--surface); box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+  z-index: 1100; padding: var(--espace-5); overflow-y: auto;
+}
+.panneau-laterale-carte img { width: 100%; border-radius: var(--rayon-petit); margin-top: var(--espace-3); }

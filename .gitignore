@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.claude/settings.local.json
+.env
+.env.local
+.DS_Store
+Thumbs.db
+supabase/.branches
+supabase/.temp
+*.log

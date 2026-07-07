@@ -1,0 +1,94 @@
+@import './tokens.css';
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; padding: 0; font-family: var(--police); background: #EDEFF3; color: #0B0E14; }
+body { min-height: 100vh; min-height: 100dvh; }
+
+#vue { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+
+.ecran { display: flex; flex-direction: column; flex: 1; padding: 16px; padding-bottom: 90px; }
+
+.entete-app {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bleu-fonce); color: #fff; padding: 14px 16px;
+  position: sticky; top: 0; z-index: 10;
+}
+.entete-app h1 { color: #fff; margin: 0; font-size: 1.1rem; }
+.entete-app .retour { background: none; border: none; color: #fff; font-size: 1.4rem; padding: 4px 8px; cursor: pointer; }
+
+.gros-bouton {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; min-height: 60px; border: none; border-radius: 14px;
+  font-size: 1.15rem; font-weight: 800; cursor: pointer; margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.gros-bouton:active { transform: scale(0.98); }
+.gros-bouton-orange { background: var(--orange); color: #fff; }
+.gros-bouton-bleu { background: var(--bleu-fonce); color: #fff; }
+.gros-bouton-vert { background: #1E7B3D; color: #fff; }
+.gros-bouton-rouge { background: #B3261E; color: #fff; }
+.gros-bouton-blanc { background: #fff; color: var(--bleu-fonce); border: 2px solid var(--bleu-fonce); }
+.gros-bouton:disabled { opacity: 0.5; }
+
+.carte-app {
+  background: #fff; border-radius: 14px; padding: 16px; margin-bottom: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08); border: 1px solid #E2E5EC;
+}
+
+.champ-app { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.champ-app label { font-weight: 700; font-size: 0.95rem; }
+.champ-app input, .champ-app select, .champ-app textarea {
+  padding: 14px; font-size: 1.05rem; border: 2px solid #D3D8E2; border-radius: 10px; background: #fff;
+}
+.champ-app input:focus, .champ-app select:focus, .champ-app textarea:focus { outline: none; border-color: var(--orange); }
+
+.pastille-navigation {
+  position: fixed; bottom: 0; left: 0; right: 0; background: #fff;
+  border-top: 1px solid #E2E5EC; display: flex; z-index: 20;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.pastille-navigation button {
+  flex: 1; background: none; border: none; padding: 10px 4px; font-size: 0.72rem;
+  font-weight: 700; color: #7A8299; display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.pastille-navigation button .icone { font-size: 1.3rem; }
+.pastille-navigation button.actif { color: var(--orange); }
+
+.arret-carte {
+  display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 14px;
+  padding: 14px; margin-bottom: 10px; border: 1px solid #E2E5EC; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.arret-carte .numero { width: 34px; height: 34px; border-radius: 50%; background: var(--bleu-fonce); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
+.arret-carte .infos { flex: 1; min-width: 0; }
+.arret-carte .infos .nom { font-weight: 800; font-size: 1.02rem; }
+.arret-carte .infos .sous { color: #7A8299; font-size: 0.85rem; }
+.arret-carte .fleches { display: flex; flex-direction: column; gap: 2px; }
+.arret-carte .fleches button { background: #EDEFF3; border: none; border-radius: 6px; width: 30px; height: 26px; font-size: 0.9rem; }
+
+.grand-titre { font-size: 1.4rem; font-weight: 900; color: var(--bleu-fonce); margin: 0 0 4px; }
+.sous-titre { color: #7A8299; margin: 0 0 16px; }
+
+.ligne-quantite { display: flex; align-items: center; justify-content: space-between; background: #fff; border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; border: 1px solid #E2E5EC; }
+.ligne-quantite .nom-produit { font-weight: 700; flex: 1; }
+.selecteur-nb { display: flex; align-items: center; gap: 10px; }
+.selecteur-nb button { width: 38px; height: 38px; border-radius: 8px; border: none; background: var(--bleu-fonce); color: #fff; font-size: 1.2rem; font-weight: 800; }
+.selecteur-nb span { min-width: 30px; text-align: center; font-weight: 800; font-size: 1.1rem; }
+
+.motif-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.motif-bouton { padding: 14px 6px; border-radius: 10px; border: 2px solid #D3D8E2; background: #fff; font-weight: 700; text-align: center; }
+.motif-bouton.selectionne { border-color: var(--orange); background: #FDEEE0; }
+
+video.camera-scan { width: 100%; border-radius: 14px; background: #000; }
+
+canvas.pad-signature { width: 100%; height: 200px; background: #fff; border: 2px dashed #D3D8E2; border-radius: 10px; touch-action: none; }
+
+.compte-a-rebours { font-size: 2rem; font-weight: 900; text-align: center; margin: 10px 0; }
+.compte-a-rebours.vert { color: #1E7B3D; }
+.compte-a-rebours.orange { color: var(--orange); }
+.compte-a-rebours.rouge { color: #B3261E; }
+
+.pave-numerique { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 300px; margin: 0 auto; }
+.pave-numerique button { min-height: 60px; font-size: 1.5rem; font-weight: 800; border-radius: 12px; border: none; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+.points-pin { display: flex; justify-content: center; gap: 14px; margin: 20px 0; }
+.points-pin span { width: 16px; height: 16px; border-radius: 50%; background: #D3D8E2; }
+.points-pin span.rempli { background: var(--bleu-fonce); }

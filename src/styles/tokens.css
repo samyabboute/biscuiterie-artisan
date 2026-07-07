@@ -1,0 +1,35 @@
+/* Identité visuelle Biscuiterie L'Artisan */
+:root {
+  --bleu-fonce: #1F3864;
+  --bleu-fonce-clair: #2B4C86;
+  --bleu-fonce-fonce: #14264A;
+  --orange: #C55A11;
+  --orange-clair: #E07B2E;
+  --orange-fonce: #9C450D;
+
+  --fond: #F4F6FA;
+  --surface: #FFFFFF;
+  --bordure: #DDE3ED;
+  --texte: #1A1F2B;
+  --texte-attenue: #5B6478;
+  --texte-inverse: #FFFFFF;
+
+  --succes: #2E7D46;
+  --alerte: #C79A1E;
+  --danger: #B3261E;
+
+  --rayon: 10px;
+  --rayon-petit: 6px;
+  --ombre: 0 2px 8px rgba(20, 38, 74, 0.08);
+  --ombre-forte: 0 8px 24px rgba(20, 38, 74, 0.16);
+
+  --espace-1: 4px;
+  --espace-2: 8px;
+  --espace-3: 12px;
+  --espace-4: 16px;
+  --espace-5: 24px;
+  --espace-6: 32px;
+  --espace-7: 48px;
+
+  --police: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
