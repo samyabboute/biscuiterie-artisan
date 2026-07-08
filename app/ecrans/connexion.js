@@ -5,8 +5,7 @@ function rendre(conteneur, { contexte }) {
   conteneur.innerHTML = `
     <div class="ecran" style="justify-content:center;">
       <div style="text-align:center; margin-bottom:24px;">
-        <div style="display:inline-flex; width:76px; height:76px; margin-bottom:12px;"><img src="${import.meta.env.BASE_URL}logo-icone.png" alt="Logo Biscuiterie L'Artisan" style="width:100%; height:100%; object-fit:contain;" /></div>
-        <div style="font-size:2rem; font-weight:900; color:var(--vert-fonce);">L'Artisan</div>
+        <div style="display:inline-flex; width:160px; margin-bottom:10px;"><img src="${import.meta.env.BASE_URL}logo-complet.png" alt="Biscuiterie L'Artisan" style="width:100%; height:auto; display:block;" /></div>
         <div style="color:#7A8299;">Application livreur</div>
       </div>
       <div id="zone-message"></div>

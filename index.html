@@ -12,29 +12,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at 20% 20%, var(--vert-fonce-clair), var(--vert-fonce-fonce) 70%);
+      background: var(--gris-50, #F8F9FB);
       text-align: center;
-      color: var(--texte-inverse);
     }
     .vitrine { max-width: 560px; padding: var(--espace-6); }
-    .vitrine-marque {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 120px; height: 120px; margin-bottom: var(--espace-4);
-      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.35));
-    }
-    .vitrine-marque img { width: 100%; height: 100%; object-fit: contain; }
-    .vitrine .nom { font-size: 2.6rem; font-weight: 800; letter-spacing: 0.02em; }
-    .vitrine .trait { width: 64px; height: 4px; background: var(--dore); margin: var(--espace-4) auto; border-radius: 2px; }
-    .vitrine p { color: #C6D0E6; font-size: 1.05rem; }
+    .vitrine-marque { display: inline-flex; width: 220px; margin: 0 auto var(--espace-4); }
+    .vitrine-marque img { width: 100%; height: auto; display: block; }
+    .vitrine p { color: var(--texte-attenue); font-size: 1.05rem; }
   </style>
 </head>
 <body>
   <div class="vitrine">
     <div class="vitrine-marque">
-      <img src="%BASE_URL%logo-icone.png" alt="Logo Biscuiterie L'Artisan" />
+      <img src="%BASE_URL%logo-complet.png" alt="Biscuiterie L'Artisan" />
     </div>
-    <div class="nom">L'Artisan</div>
-    <div class="trait"></div>
     <p>Biscuiterie artisanale — gestion de la distribution et des livraisons.</p>
   </div>
 </body>
