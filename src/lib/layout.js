@@ -70,7 +70,7 @@ export function construireShell({ profil, moduleActifId }) {
   racine.innerHTML = `
     <aside class="shell-barre-laterale">
       <div class="shell-logo">
-        <span class="shell-logo-marque">${icone('package', 18)}</span>
+        <span class="shell-logo-marque"><img src="${import.meta.env.BASE_URL}logo-icone.png" alt="Logo Biscuiterie L'Artisan" /></span>
         <span class="shell-logo-texte">
           <span class="shell-logo-nom">L'Artisan</span>
           <span class="shell-logo-sous">Biscuiterie</span>

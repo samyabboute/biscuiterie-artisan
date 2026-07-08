@@ -6,7 +6,7 @@
 }
 .arret-item.en-glissement { opacity: 0.4; }
 .arret-item .poignee { color: var(--texte-attenue); }
-.arret-item .ordre { font-weight: 800; color: var(--bleu-fonce); width: 22px; }
+.arret-item .ordre { font-weight: 800; color: var(--vert-fonce); width: 22px; }
 .arret-item .infos { flex: 1; }
 .arret-item .infos .nom { font-weight: 600; }
 .arret-item .infos .sous { font-size: 0.78rem; color: var(--texte-attenue); }

@@ -28,7 +28,7 @@
 .marqueur-rouge { background: #B3261E; }
 
 .marqueur-cluster {
-  background: var(--bleu-fonce); color: #fff; border-radius: 50%;
+  background: var(--vert-fonce); color: #fff; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-weight: 800; font-size: 0.8rem; border: 2px solid #fff; box-shadow: 0 0 4px rgba(0,0,0,0.4);
 }

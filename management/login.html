@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="%BASE_URL%favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connexion — Biscuiterie L'Artisan</title>
   <link rel="stylesheet" href="/src/styles/base.css" />
@@ -11,7 +12,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(160deg, var(--bleu-fonce) 0%, var(--bleu-fonce-fonce) 100%);
+      background: linear-gradient(160deg, var(--vert-fonce) 0%, var(--vert-fonce-fonce) 100%);
     }
     .connexion-carte {
       width: 100%;
@@ -22,12 +23,9 @@
       padding: var(--espace-7) var(--espace-6);
     }
     .connexion-logo { text-align: center; margin-bottom: var(--espace-6); }
-    .connexion-logo-marque {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 52px; height: 52px; border-radius: 15px; background: var(--orange); color: #fff;
-      box-shadow: 0 6px 14px rgba(197, 90, 17, 0.3); margin-bottom: var(--espace-3);
-    }
-    .connexion-logo .nom { display: block; font-size: 1.6rem; font-weight: 800; color: var(--bleu-fonce); }
+    .connexion-logo-marque { display: inline-flex; width: 72px; height: 72px; margin-bottom: var(--espace-3); }
+    .connexion-logo-marque img { width: 100%; height: 100%; object-fit: contain; }
+    .connexion-logo .nom { display: block; font-size: 1.6rem; font-weight: 800; color: var(--vert-fonce); }
     .connexion-logo .sous { display: block; font-size: 0.8rem; color: var(--texte-attenue); letter-spacing: 0.08em; text-transform: uppercase; }
     .connexion-carte .bouton { width: 100%; margin-top: var(--espace-2); }
     #matricule { text-transform: uppercase; }
@@ -37,7 +35,7 @@
   <form class="connexion-carte" id="formulaire-connexion" autocomplete="off">
     <div class="connexion-logo">
       <div class="connexion-logo-marque">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7.5 12 3 3 7.5l9 4.5 9-4.5Z"/><path d="M3 7.5v9l9 4.5 9-4.5v-9"/><path d="M12 12v9"/></svg>
+        <img src="%BASE_URL%logo-icone.png" alt="Logo Biscuiterie L'Artisan" />
       </div>
       <span class="nom">L'Artisan</span>
       <span class="sous">Espace interne</span>

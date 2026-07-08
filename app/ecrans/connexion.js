@@ -1,13 +1,12 @@
 import { supabase } from '../../src/lib/supabaseClient.js';
 import { matriculeVersEmail, matriculeValide } from '../../src/lib/auth.js';
-import { icone } from '../../src/lib/icons.js';
 
 function rendre(conteneur, { contexte }) {
   conteneur.innerHTML = `
     <div class="ecran" style="justify-content:center;">
       <div style="text-align:center; margin-bottom:24px;">
-        <div style="display:inline-flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:16px; background:var(--orange); color:#fff; box-shadow:0 6px 14px rgba(197,90,17,0.3); margin-bottom:12px;">${icone('truck', 28)}</div>
-        <div style="font-size:2rem; font-weight:900; color:var(--bleu-fonce);">L'Artisan</div>
+        <div style="display:inline-flex; width:76px; height:76px; margin-bottom:12px;"><img src="${import.meta.env.BASE_URL}logo-icone.png" alt="Logo Biscuiterie L'Artisan" style="width:100%; height:100%; object-fit:contain;" /></div>
+        <div style="font-size:2rem; font-weight:900; color:var(--vert-fonce);">L'Artisan</div>
         <div style="color:#7A8299;">Application livreur</div>
       </div>
       <div id="zone-message"></div>

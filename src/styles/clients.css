@@ -49,4 +49,4 @@ td.col-actions button { font-size: 0.8rem; padding: var(--espace-1) var(--espace
 
 .panneau-qr { text-align: center; padding: var(--espace-5); }
 .panneau-qr img { width: 220px; height: 220px; border: 1px solid var(--bordure); border-radius: var(--rayon-petit); }
-.panneau-qr .id-client { font-size: 1.1rem; font-weight: 800; color: var(--bleu-fonce); margin-top: var(--espace-3); }
+.panneau-qr .id-client { font-size: 1.1rem; font-weight: 800; color: var(--vert-fonce); margin-top: var(--espace-3); }

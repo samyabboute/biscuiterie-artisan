@@ -8,3 +8,5 @@ Thumbs.db
 supabase/.branches
 supabase/.temp
 *.log
+assets-source/
+1x/

@@ -25,7 +25,7 @@ body { min-height: 100vh; min-height: 100dvh; }
 
 .entete-app {
   display: flex; align-items: center; justify-content: space-between;
-  background: linear-gradient(135deg, var(--bleu-fonce) 0%, var(--bleu-fonce-fonce) 100%);
+  background: linear-gradient(135deg, var(--vert-fonce) 0%, var(--vert-fonce-fonce) 100%);
   color: #fff; padding: 16px; padding-top: calc(16px + env(safe-area-inset-top));
   position: sticky; top: 0; z-index: 10;
   box-shadow: 0 2px 10px rgba(20, 38, 74, 0.25);
@@ -46,11 +46,11 @@ body { min-height: 100vh; min-height: 100dvh; }
   transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
 .gros-bouton:active { transform: scale(0.97); box-shadow: 0 1px 3px rgba(0,0,0,0.16); }
-.gros-bouton-orange { background: var(--orange); color: #fff; }
-.gros-bouton-bleu { background: var(--bleu-fonce); color: #fff; }
+.gros-bouton-orange { background: var(--dore); color: #fff; }
+.gros-bouton-bleu { background: var(--vert-fonce); color: #fff; }
 .gros-bouton-vert { background: #1E7B3D; color: #fff; }
 .gros-bouton-rouge { background: #B3261E; color: #fff; }
-.gros-bouton-blanc { background: #fff; color: var(--bleu-fonce); border: 2px solid var(--bleu-fonce); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.gros-bouton-blanc { background: #fff; color: var(--vert-fonce); border: 2px solid var(--vert-fonce); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
 .gros-bouton:disabled { opacity: 0.45; box-shadow: none; }
 
 .carte-app {
@@ -63,7 +63,7 @@ body { min-height: 100vh; min-height: 100dvh; }
 .champ-app input, .champ-app select, .champ-app textarea {
   padding: 14px; font-size: 1.05rem; border: 2px solid #D3D8E2; border-radius: 10px; background: #fff;
 }
-.champ-app input:focus, .champ-app select:focus, .champ-app textarea:focus { outline: none; border-color: var(--orange); box-shadow: 0 0 0 4px rgba(197, 90, 17, 0.15); }
+.champ-app input:focus, .champ-app select:focus, .champ-app textarea:focus { outline: none; border-color: var(--dore); box-shadow: 0 0 0 4px rgba(166, 129, 46, 0.15); }
 
 .pastille-navigation {
   position: fixed; bottom: 0; left: 0; right: 0; background: #fff;
@@ -75,14 +75,14 @@ body { min-height: 100vh; min-height: 100dvh; }
   flex: 1; background: none; border: none; padding: 9px 4px 8px; font-size: 0.7rem;
   font-weight: 700; color: #8B93A5; display: flex; flex-direction: column; align-items: center; gap: 3px;
 }
-.pastille-navigation button.actif { color: var(--orange); }
+.pastille-navigation button.actif { color: var(--dore); }
 .pastille-navigation button:active { background: #F4F5F8; }
 
 .arret-carte {
   display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 14px;
   padding: 14px; margin-bottom: 10px; border: 1px solid #DEE2EA; box-shadow: 0 1px 4px rgba(16, 20, 31, 0.06);
 }
-.arret-carte .numero { width: 34px; height: 34px; border-radius: 50%; background: var(--bleu-fonce); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
+.arret-carte .numero { width: 34px; height: 34px; border-radius: 50%; background: var(--vert-fonce); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
 .arret-carte .infos { flex: 1; min-width: 0; }
 .arret-carte .infos .nom { font-weight: 800; font-size: 1.02rem; }
 .arret-carte .infos .sous { color: #6B7385; font-size: 0.85rem; }
@@ -90,19 +90,19 @@ body { min-height: 100vh; min-height: 100dvh; }
 .arret-carte .fleches button { background: #EDEFF3; border: none; border-radius: 7px; width: 32px; height: 28px; font-size: 0.95rem; }
 .arret-carte .fleches button:active { background: #DDE1E9; }
 
-.grand-titre { font-size: 1.45rem; font-weight: 900; color: var(--bleu-fonce); margin: 0 0 4px; }
+.grand-titre { font-size: 1.45rem; font-weight: 900; color: var(--vert-fonce); margin: 0 0 4px; }
 .sous-titre { color: #6B7385; margin: 0 0 16px; }
 
 .ligne-quantite { display: flex; align-items: center; justify-content: space-between; background: #fff; border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; border: 1px solid #DEE2EA; }
 .ligne-quantite .nom-produit { font-weight: 700; flex: 1; }
 .selecteur-nb { display: flex; align-items: center; gap: 10px; }
-.selecteur-nb button { width: 40px; height: 40px; border-radius: 9px; border: none; background: var(--bleu-fonce); color: #fff; font-size: 1.3rem; font-weight: 800; }
-.selecteur-nb button:active { background: var(--bleu-fonce-fonce); }
+.selecteur-nb button { width: 40px; height: 40px; border-radius: 9px; border: none; background: var(--vert-fonce); color: #fff; font-size: 1.3rem; font-weight: 800; }
+.selecteur-nb button:active { background: var(--vert-fonce-fonce); }
 .selecteur-nb span { min-width: 32px; text-align: center; font-weight: 800; font-size: 1.15rem; }
 
 .motif-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
 .motif-bouton { padding: 14px 6px; border-radius: 10px; border: 2px solid #D3D8E2; background: #fff; font-weight: 700; text-align: center; }
-.motif-bouton.selectionne { border-color: var(--orange); background: #FDEEE0; color: var(--orange-fonce); }
+.motif-bouton.selectionne { border-color: var(--dore); background: #FDEEE0; color: var(--dore-fonce); }
 
 video.camera-scan { width: 100%; border-radius: 14px; background: #000; }
 
@@ -110,16 +110,16 @@ canvas.pad-signature { width: 100%; height: 200px; background: #fff; border: 2px
 
 .compte-a-rebours { font-size: 2.1rem; font-weight: 900; text-align: center; margin: 10px 0; }
 .compte-a-rebours.vert { color: #1E7B3D; }
-.compte-a-rebours.orange { color: var(--orange); }
+.compte-a-rebours.orange { color: var(--dore); }
 .compte-a-rebours.rouge { color: #B3261E; }
 
 .pave-numerique { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 300px; margin: 0 auto; }
-.pave-numerique button { min-height: 62px; font-size: 1.5rem; font-weight: 800; border-radius: 12px; border: none; background: #fff; box-shadow: 0 1px 4px rgba(16, 20, 31, 0.1); color: var(--bleu-fonce); }
+.pave-numerique button { min-height: 62px; font-size: 1.5rem; font-weight: 800; border-radius: 12px; border: none; background: #fff; box-shadow: 0 1px 4px rgba(16, 20, 31, 0.1); color: var(--vert-fonce); }
 .pave-numerique button:active { background: #EEF0F4; }
 .points-pin { display: flex; justify-content: center; gap: 14px; margin: 20px 0; }
 .points-pin span { width: 16px; height: 16px; border-radius: 50%; background: #D3D8E2; transition: background 0.15s ease; }
-.points-pin span.rempli { background: var(--bleu-fonce); }
-.pin-icone-verrou { color: var(--bleu-fonce); background: #EEF1F6; width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+.points-pin span.rempli { background: var(--vert-fonce); }
+.pin-icone-verrou { color: var(--vert-fonce); background: #EEF1F6; width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
 
 /* Repère "étape X sur 4" du parcours de visite client */
 .indicateur-etapes { display: flex; align-items: center; margin-bottom: 18px; }
@@ -129,8 +129,8 @@ canvas.pad-signature { width: 100%; height: 200px; background: #fff; border: 2px
   color: #8B93A5; font-weight: 800; font-size: 0.78rem;
   display: flex; align-items: center; justify-content: center;
 }
-.indicateur-etape.actuel .indicateur-etape-point { border-color: var(--orange); color: var(--orange); background: #fff; }
+.indicateur-etape.actuel .indicateur-etape-point { border-color: var(--dore); color: var(--dore); background: #fff; }
 .indicateur-etape.fait .indicateur-etape-point { border-color: #1E7B3D; background: #1E7B3D; color: #fff; }
 .indicateur-etape-label { font-size: 0.66rem; font-weight: 700; color: #8B93A5; white-space: nowrap; }
-.indicateur-etape.actuel .indicateur-etape-label { color: var(--bleu-fonce); }
+.indicateur-etape.actuel .indicateur-etape-label { color: var(--vert-fonce); }
 .indicateur-etape-trait { flex: 1; height: 2px; background: #D3D8E2; margin: 0 4px 16px; }

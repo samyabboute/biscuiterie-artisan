@@ -24,11 +24,8 @@
 }
 
 .shell-logo { display: flex; align-items: center; gap: 10px; padding: 6px var(--espace-2) var(--espace-4); border-bottom: 1px solid var(--bordure); }
-.shell-logo-marque {
-  display: flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border-radius: 9px;
-  background: var(--bleu-fonce); color: #fff; flex-shrink: 0;
-}
+.shell-logo-marque { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; flex-shrink: 0; }
+.shell-logo-marque img { width: 100%; height: 100%; object-fit: contain; }
 .shell-logo-texte { display: flex; flex-direction: column; line-height: 1.15; }
 .shell-logo-nom { font-size: 1rem; font-weight: 800; color: var(--texte); letter-spacing: -0.01em; }
 .shell-logo-sous { font-size: 0.65rem; color: var(--gris-500); letter-spacing: 0.07em; text-transform: uppercase; }
@@ -50,11 +47,11 @@
   transition: background var(--transition-rapide), color var(--transition-rapide);
 }
 .shell-nav-item:hover { background: var(--gris-50); color: var(--texte); text-decoration: none; }
-.shell-nav-item.actif { background: var(--orange-teinte); color: var(--orange-fonce); font-weight: 700; }
+.shell-nav-item.actif { background: var(--dore-teinte); color: var(--dore-fonce); font-weight: 700; }
 .shell-nav-item.desactive { opacity: 0.4; cursor: default; pointer-events: none; justify-content: space-between; }
 .shell-nav-icone { display: flex; color: var(--gris-500); }
 .shell-nav-item:hover .shell-nav-icone { color: var(--texte); }
-.shell-nav-item.actif .shell-nav-icone { color: var(--orange); }
+.shell-nav-item.actif .shell-nav-icone { color: var(--dore); }
 
 .shell-corps { display: flex; flex-direction: column; min-width: 0; }
 
@@ -76,7 +73,7 @@
 .shell-entete-profil { display: flex; align-items: center; gap: var(--espace-3); }
 .shell-profil-avatar {
   width: 32px; height: 32px; border-radius: 50%;
-  background: var(--bleu-fonce); color: #fff;
+  background: var(--vert-fonce); color: #fff;
   display: flex; align-items: center; justify-content: center;
   font-weight: 700; font-size: 0.74rem; letter-spacing: 0.02em;
   flex-shrink: 0;

@@ -7,8 +7,8 @@
   "id": "/biscuiterie-artisan/app/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#1F3864",
-  "theme_color": "#1F3864",
+  "background_color": "#304D2B",
+  "theme_color": "#304D2B",
   "lang": "fr",
   "icons": [
     { "src": "/biscuiterie-artisan/app/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },

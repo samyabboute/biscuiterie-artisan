@@ -16,7 +16,7 @@ body { min-height: 100vh; }
 h1, h2, h3, h4 { margin: 0 0 var(--espace-3); color: var(--texte); letter-spacing: -0.015em; font-weight: 700; }
 p { margin: 0 0 var(--espace-3); line-height: 1.55; color: var(--texte); }
 
-a { color: var(--orange); text-decoration: none; }
+a { color: var(--dore); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 button, input, select, textarea { font-family: inherit; font-size: 1rem; }
@@ -48,8 +48,8 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; }
 .bouton:active:not(:disabled) { transform: translateY(1px); }
 .bouton:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.bouton-primaire { background: var(--orange); color: var(--texte-inverse); box-shadow: 0 1px 2px rgba(197, 90, 17, 0.3); }
-.bouton-primaire:hover:not(:disabled) { background: var(--orange-fonce); }
+.bouton-primaire { background: var(--dore); color: var(--texte-inverse); box-shadow: 0 1px 2px rgba(166, 129, 46, 0.3); }
+.bouton-primaire:hover:not(:disabled) { background: var(--dore-fonce); }
 
 .bouton-secondaire { background: var(--surface); color: var(--texte); border: 1px solid var(--bordure); }
 .bouton-secondaire:hover:not(:disabled) { background: var(--gris-50); border-color: var(--gris-300); }
@@ -74,8 +74,8 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; }
 }
 .champ input:focus, .champ select:focus, .champ textarea:focus {
   outline: none;
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px var(--orange-teinte);
+  border-color: var(--dore);
+  box-shadow: 0 0 0 3px var(--dore-teinte);
 }
 
 .carte {
@@ -101,7 +101,7 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; }
 .badge-vert { background: var(--succes-teinte); color: var(--succes); }
 .badge-orange { background: var(--alerte-teinte); color: var(--alerte); }
 .badge-rouge { background: var(--danger-teinte); color: var(--danger); }
-.badge-bleu { background: var(--info-teinte); color: var(--bleu-fonce); }
+.badge-bleu { background: var(--info-teinte); color: var(--vert-fonce); }
 .badge-gris { background: var(--gris-100); color: var(--texte-attenue); }
 
 .message-erreur {
@@ -116,7 +116,7 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; }
 
 .message-info {
   background: var(--info-teinte);
-  color: var(--bleu-fonce);
+  color: var(--vert-fonce);
   border-radius: var(--rayon-petit);
   padding: var(--espace-3) var(--espace-4);
   margin-bottom: var(--espace-4);
@@ -127,7 +127,7 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; }
 /* Phrase d'explication en tête de module — répond à "à quoi sert cette
    page et comment l'utiliser" avant même de voir le tableau. */
 .page-explication {
-  background: var(--info-teinte); color: var(--bleu-fonce);
+  background: var(--info-teinte); color: var(--vert-fonce);
   border: 1px solid rgba(31, 56, 100, 0.1); border-radius: var(--rayon-petit);
   padding: var(--espace-3) var(--espace-4); margin-bottom: var(--espace-4);
   font-size: 0.85rem; line-height: 1.5; max-width: 780px;

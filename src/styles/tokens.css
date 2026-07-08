@@ -1,12 +1,13 @@
-/* Identité visuelle Biscuiterie L'Artisan — style SaaS épuré */
+/* Identité visuelle Biscuiterie L'Artisan — style SaaS épuré
+   Couleurs extraites directement du logo (moulin doré sur fond vert). */
 :root {
-  --bleu-fonce: #1F3864;
-  --bleu-fonce-clair: #2B4C86;
-  --bleu-fonce-fonce: #14264A;
-  --orange: #C55A11;
-  --orange-clair: #E07B2E;
-  --orange-fonce: #9C450D;
-  --orange-teinte: #FDF1E7;
+  --vert-fonce: #304D2B;
+  --vert-fonce-clair: #4A7340;
+  --vert-fonce-fonce: #1E2F1A;
+  --dore: #A6812E;
+  --dore-clair: #D8C48B;
+  --dore-fonce: #7A5E1F;
+  --dore-teinte: #F6EFDD;
 
   /* Échelle de gris neutre — l'essentiel des surfaces vient d'ici, la couleur
      de marque n'intervient qu'en accent (boutons, actifs, liens). */

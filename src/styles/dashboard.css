@@ -6,7 +6,7 @@
   box-shadow: var(--ombre-1); transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition-rapide);
 }
 .action-rapide:hover { text-decoration: none; box-shadow: var(--ombre-2); border-color: var(--gris-300); transform: translateY(-1px); }
-.action-rapide-icone { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--orange-teinte); color: var(--orange); flex-shrink: 0; }
+.action-rapide-icone { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--dore-teinte); color: var(--dore); flex-shrink: 0; }
 
 .grille-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espace-4); margin-bottom: var(--espace-5); }
 .carte.kpi { display: flex; flex-direction: column; gap: 2px; }
