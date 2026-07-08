@@ -124,6 +124,15 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; }
   border: 1px solid rgba(31, 56, 100, 0.1);
 }
 
+/* Phrase d'explication en tête de module — répond à "à quoi sert cette
+   page et comment l'utiliser" avant même de voir le tableau. */
+.page-explication {
+  background: var(--info-teinte); color: var(--bleu-fonce);
+  border: 1px solid rgba(31, 56, 100, 0.1); border-radius: var(--rayon-petit);
+  padding: var(--espace-3) var(--espace-4); margin-bottom: var(--espace-4);
+  font-size: 0.85rem; line-height: 1.5; max-width: 780px;
+}
+
 /* État vide — icône + message + éventuel appel à l'action, au lieu d'un
    simple texte "Aucune donnée" qui laisse l'utilisateur sans repère. */
 .etat-vide {

@@ -8,7 +8,8 @@ async function rendre(conteneur, { etat, naviguer, contexte }) {
   const ecran = document.createElement('div');
   ecran.innerHTML = `
     <div class="ecran">
-      <h2 class="grand-titre">Nouvelle commande</h2>
+      <h2 class="grand-titre">Prendre une commande</h2>
+      <p class="sous-titre">Pour une vente décidée sur place, hors de votre tournée planifiée. Elle sera envoyée au siège pour validation à la prochaine synchronisation.</p>
       <div class="champ-app">
         <label>Client</label>
         <select id="select-client"><option value="">—</option>

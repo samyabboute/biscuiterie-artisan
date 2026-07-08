@@ -21,6 +21,11 @@ if (profil) {
 async function demarrer(contenu) {
   const aujourdHui = new Date().toISOString().slice(0, 10);
   contenu.innerHTML = `
+    <p class="page-explication">
+      Assemblez une tournée : choisissez un livreur, sélectionnez ses commandes validées, définissez le
+      <strong>chargement</strong> (produits/quantités qui partent avec lui). Le livreur peut ensuite ajouter
+      lui-même des commandes prises sur place depuis son application — elles apparaîtront ici après synchronisation.
+    </p>
     <div class="barre-outils">
       <input type="date" id="filtre-date" value="${aujourdHui}" />
       <select id="filtre-livreur"><option value="">Tous les livreurs</option></select>
@@ -30,8 +35,8 @@ async function demarrer(contenu) {
     </div>
     <div class="carte tableau-clients-conteneur">
       <table>
-        <thead><tr><th>Tournée</th><th>Livreur</th><th>Date</th><th>Statut</th><th>Arrêts</th><th>Actions</th></tr></thead>
-        <tbody id="corps-tableau"><tr><td colspan="6">Chargement...</td></tr></tbody>
+        <thead><tr><th>Tournée</th><th>Livreur</th><th>Date</th><th>Statut</th><th>Commandes assignées</th><th>Chargement</th><th>Actions</th></tr></thead>
+        <tbody id="corps-tableau"><tr><td colspan="7">Chargement...</td></tr></tbody>
       </table>
     </div>
   `;
@@ -68,13 +73,14 @@ async function chargerTournees() {
   if (livreur) requete = requete.eq('livreur', livreur);
 
   const { data, error } = await requete;
-  if (error) { corps.innerHTML = `<tr><td colspan="6"><div class="message-erreur">${error.message}</div></td></tr>`; return; }
+  if (error) { corps.innerHTML = `<tr><td colspan="7"><div class="message-erreur">${error.message}</div></td></tr>`; return; }
 
   etat.tournees = data || [];
-  corps.innerHTML = etat.tournees.length === 0 ? `<tr><td colspan="6">Aucune tournée pour ces filtres.</td></tr>` : etat.tournees.map((t) => {
+  corps.innerHTML = etat.tournees.length === 0 ? `<tr><td colspan="7">Aucune tournée pour ces filtres.</td></tr>` : etat.tournees.map((t) => {
     const s = LIBELLES_STATUT[t.statut] || { texte: t.statut, classe: 'badge-gris' };
     const livreurInfo = etat.livreurs.find((l) => l.matricule === t.livreur);
     const nbArrets = t.tournee_arrets?.[0]?.count ?? 0;
+    const nbChargement = (t.chargement_depart || []).length;
     return `
       <tr data-id="${t.id_tournee}">
         <td><strong>${t.id_tournee}</strong></td>
@@ -82,8 +88,9 @@ async function chargerTournees() {
         <td>${t.date_tournee}</td>
         <td><span class="badge ${s.classe}">${s.texte}</span></td>
         <td>${nbArrets}</td>
+        <td>${nbChargement > 0 ? `<span class="badge badge-vert">${nbChargement} produit(s)</span>` : `<span class="badge badge-gris">Non défini</span>`}</td>
         <td class="col-actions">
-          <button type="button" class="bouton bouton-secondaire" data-action="arrets">Arrêts</button>
+          <button type="button" class="bouton bouton-secondaire" data-action="arrets">Commandes</button>
           <button type="button" class="bouton bouton-secondaire" data-action="chargement">Chargement</button>
           <button type="button" class="bouton bouton-secondaire" data-action="retour">Retour invendus</button>
           ${t.statut === 'planifiee' ? `<button type="button" class="bouton bouton-primaire" data-action="demarrer">Démarrer</button>` : ''}
