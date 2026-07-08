@@ -1,6 +1,18 @@
 import { exigerSession } from '../src/lib/auth.js';
 import { construireShell } from '../src/lib/layout.js';
 import { supabase } from '../src/lib/supabaseClient.js';
+import { icone } from '../src/lib/icons.js';
+
+const BASE = import.meta.env.BASE_URL;
+// Actions rapides mises en avant sur l'accueil : répond directement à
+// "je veux faire X, où est-ce que je clique ?" sans devoir chercher dans
+// le menu. Chacune n'apparaît que pour les rôles qui y ont accès.
+const ACTIONS_RAPIDES = [
+  { label: 'Nouveau client', icone: 'store', href: 'management/clients.html', roles: ['super_admin', 'directeur_commercial', 'agent_adv', 'superviseur_zone'] },
+  { label: 'Nouvelle commande', icone: 'package', href: 'management/commandes.html', roles: ['super_admin', 'directeur_commercial', 'agent_adv', 'superviseur_zone'] },
+  { label: 'Construire une tournée', icone: 'truck', href: 'management/tournees.html', roles: ['super_admin', 'resp_logistique'] },
+  { label: 'Voir la carte du jour', icone: 'map', href: 'management/carte.html', roles: ['super_admin', 'directeur_commercial', 'resp_logistique', 'superviseur_zone'] },
+];
 
 const LIBELLES_MOTIF = { rupture: 'Rupture de stock', refus: 'Client refuse', ferme: 'Point fermé', dlc: 'DLC dépassée' };
 const JOURS_SANS_VISITE_SEUIL = 7;
@@ -79,7 +91,19 @@ async function demarrer(contenu, profil) {
   // -------------------------------------------------- écarts par motif
   const parMotif = grouperCompter(l.filter((x) => x.motif_ecart), (x) => x.motif_ecart);
 
+  const actionsVisibles = ACTIONS_RAPIDES.filter((a) => a.roles.includes(profil.role));
+
   contenu.innerHTML = `
+    ${actionsVisibles.length ? `
+      <div class="actions-rapides">
+        ${actionsVisibles.map((a) => `
+          <a class="action-rapide" href="${BASE}${a.href}">
+            <span class="action-rapide-icone">${icone(a.icone, 20)}</span>
+            <span>${a.label}</span>
+          </a>
+        `).join('')}
+      </div>
+    ` : ''}
     <div class="grille-kpi">
       <div class="carte kpi"><div class="kpi-valeur">${tauxService}%</div><div class="kpi-libelle">Taux de service (${livrees + partielles}/${totalCommandes})</div></div>
       <div class="carte kpi"><div class="kpi-valeur">${caTotal.toLocaleString('fr-FR')} DA</div><div class="kpi-libelle">CA livré aujourd'hui</div></div>

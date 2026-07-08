@@ -7,6 +7,29 @@ import { icone } from '../../src/lib/icons.js';
 
 const LIBELLES_MOTIF = { rupture: 'Rupture de stock', refus: 'Client refuse', ferme: 'Point fermé', dlc: 'DLC dépassée' };
 
+// Repère visuel "étape X sur 4" affiché en haut de chaque écran de la visite —
+// répond directement au sentiment "trop d'étapes, je ne sais pas où j'en suis".
+const ETAPES_VISITE = [
+  { id: 'arrivee', label: 'Arrivée' },
+  { id: 'livraison', label: 'Livraison' },
+  { id: 'preuve', label: 'Preuve' },
+  { id: 'encaissement', label: 'Paiement' },
+];
+function indicateurEtapes(etapeActuelle) {
+  const index = ETAPES_VISITE.findIndex((e) => e.id === etapeActuelle);
+  return `
+    <div class="indicateur-etapes">
+      ${ETAPES_VISITE.map((e, i) => `
+        <div class="indicateur-etape ${i < index ? 'fait' : ''} ${i === index ? 'actuel' : ''}">
+          <span class="indicateur-etape-point">${i < index ? icone('checkCircle', 13) : i + 1}</span>
+          <span class="indicateur-etape-label">${e.label}</span>
+        </div>
+        ${i < ETAPES_VISITE.length - 1 ? '<span class="indicateur-etape-trait"></span>' : ''}
+      `).join('')}
+    </div>
+  `;
+}
+
 async function rendre(conteneur, { etat, naviguer }) {
   const visite = etat.visite;
   if (!visite) { naviguer('tournee'); return; }
@@ -30,6 +53,7 @@ function dessinerArrivee(conteneur, etat, naviguer, visite) {
   conteneur.innerHTML = `
     <div class="entete-app"><button class="retour" id="btn-retour">←</button><h1>Arrivée client</h1><span></span></div>
     <div class="ecran">
+      ${indicateurEtapes('arrivee')}
       <div class="carte-app">
         <div class="grand-titre" style="font-size:1.15rem;">${client?.raison_sociale || visite.commande.client_id}</div>
         <div class="sous-titre" style="margin:0;">${visite.commande.id_commande} — zone ${client?.zone || '—'}</div>
@@ -103,6 +127,7 @@ function dessinerLivraison(conteneur, etat, naviguer, visite) {
   conteneur.innerHTML = `
     <div class="entete-app"><span></span><h1>Livraison</h1><span></span></div>
     <div class="ecran">
+      ${indicateurEtapes('livraison')}
       <p class="sous-titre">Ajustez les quantités réellement livrées.</p>
       <div id="liste-lignes"></div>
       <div id="zone-motif" style="display:none;">
@@ -169,6 +194,7 @@ async function dessinerPreuve(conteneur, etat, naviguer, visite) {
   conteneur.innerHTML = `
     <div class="entete-app"><span></span><h1>Preuve de livraison</h1><span></span></div>
     <div class="ecran">
+      ${indicateurEtapes('preuve')}
       <div class="carte-app" style="text-align:center;">
         <div class="sous-titre" style="margin:0;">Bon de livraison n°</div>
         <div class="grand-titre">${visite.numeroBL}</div>
@@ -225,6 +251,7 @@ function dessinerEncaissement(conteneur, etat, naviguer, visite) {
   conteneur.innerHTML = `
     <div class="entete-app"><span></span><h1>Encaissement</h1><span></span></div>
     <div class="ecran">
+      ${indicateurEtapes('encaissement')}
       <div class="carte-app" style="text-align:center;">
         <div class="sous-titre" style="margin:0;">Montant à encaisser</div>
         <div class="grand-titre">${total.toLocaleString('fr-FR')} DA</div>

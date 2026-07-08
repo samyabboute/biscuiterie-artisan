@@ -1,4 +1,4 @@
-/* Identité visuelle Biscuiterie L'Artisan */
+/* Identité visuelle Biscuiterie L'Artisan — style SaaS épuré */
 :root {
   --bleu-fonce: #1F3864;
   --bleu-fonce-clair: #2B4C86;
@@ -6,22 +6,43 @@
   --orange: #C55A11;
   --orange-clair: #E07B2E;
   --orange-fonce: #9C450D;
+  --orange-teinte: #FDF1E7;
 
-  --fond: #F4F6FA;
+  /* Échelle de gris neutre — l'essentiel des surfaces vient d'ici, la couleur
+     de marque n'intervient qu'en accent (boutons, actifs, liens). */
+  --gris-25: #FCFCFD;
+  --gris-50: #F8F9FB;
+  --gris-100: #F1F3F7;
+  --gris-200: #E4E8EF;
+  --gris-300: #D3D9E3;
+  --gris-500: #8A93A6;
+  --gris-700: #4B5468;
+
+  --fond: var(--gris-50);
   --surface: #FFFFFF;
-  --bordure: #DDE3ED;
-  --texte: #1A1F2B;
-  --texte-attenue: #5B6478;
+  --bordure: var(--gris-200);
+  --texte: #14181F;
+  --texte-attenue: var(--gris-500);
   --texte-inverse: #FFFFFF;
 
-  --succes: #2E7D46;
-  --alerte: #C79A1E;
-  --danger: #B3261E;
+  --succes: #1E8A4C;
+  --succes-teinte: #E8F6EE;
+  --alerte: #B8790A;
+  --alerte-teinte: #FDF3E1;
+  --danger: #C4291F;
+  --danger-teinte: #FCEBEA;
+  --info-teinte: #EAEFFB;
 
-  --rayon: 10px;
-  --rayon-petit: 6px;
-  --ombre: 0 2px 8px rgba(20, 38, 74, 0.08);
-  --ombre-forte: 0 8px 24px rgba(20, 38, 74, 0.16);
+  --rayon: 12px;
+  --rayon-petit: 8px;
+  --rayon-grand: 16px;
+
+  /* Échelle d'élévation — ombres douces et discrètes, jamais dures */
+  --ombre-1: 0 1px 2px rgba(20, 24, 31, 0.05);
+  --ombre-2: 0 2px 8px rgba(20, 24, 31, 0.06), 0 1px 2px rgba(20, 24, 31, 0.04);
+  --ombre-3: 0 8px 24px rgba(20, 24, 31, 0.10), 0 2px 6px rgba(20, 24, 31, 0.05);
+  --ombre: var(--ombre-2);
+  --ombre-forte: var(--ombre-3);
 
   --espace-1: 4px;
   --espace-2: 8px;
@@ -31,5 +52,8 @@
   --espace-6: 32px;
   --espace-7: 48px;
 
-  --police: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --transition-rapide: 0.12s ease;
+  --transition: 0.18s cubic-bezier(0.2, 0, 0.2, 1);
+
+  --police: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, Arial, sans-serif;
 }

@@ -1,16 +1,27 @@
+.actions-rapides { display: flex; gap: var(--espace-3); margin-bottom: var(--espace-6); flex-wrap: wrap; }
+.action-rapide {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface); border: 1px solid var(--bordure); border-radius: var(--rayon);
+  padding: 12px 18px; font-weight: 600; font-size: 0.87rem; color: var(--texte);
+  box-shadow: var(--ombre-1); transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition-rapide);
+}
+.action-rapide:hover { text-decoration: none; box-shadow: var(--ombre-2); border-color: var(--gris-300); transform: translateY(-1px); }
+.action-rapide-icone { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--orange-teinte); color: var(--orange); flex-shrink: 0; }
+
 .grille-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espace-4); margin-bottom: var(--espace-5); }
-.carte.kpi { text-align: center; }
-.kpi-valeur { font-size: 1.6rem; font-weight: 800; color: var(--bleu-fonce); }
-.kpi-libelle { color: var(--texte-attenue); font-size: 0.85rem; margin-top: 4px; }
+.carte.kpi { display: flex; flex-direction: column; gap: 2px; }
+.kpi-valeur { font-size: 1.7rem; font-weight: 800; color: var(--texte); letter-spacing: -0.02em; }
+.kpi-libelle { color: var(--texte-attenue); font-size: 0.83rem; }
 
 .grille-deux { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espace-4); margin-bottom: var(--espace-4); }
 .grille-deux .carte h3 { margin-top: 0; }
 
-.pastille-dashboard { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.pastille-dashboard { display: inline-block; width: 9px; height: 9px; border-radius: 50%; }
 .pastille-dashboard.pastille-vert { background: var(--succes); }
 .pastille-dashboard.pastille-orange { background: var(--alerte); }
 .pastille-dashboard.pastille-rouge { background: var(--danger); }
 
 @media (max-width: 900px) {
   .grille-deux { grid-template-columns: 1fr; }
+  .actions-rapides { flex-direction: column; }
 }

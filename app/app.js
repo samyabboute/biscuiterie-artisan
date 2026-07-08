@@ -51,8 +51,12 @@ async function rendre() {
   if (!etat.profil) {
     etat.profil = await recupererProfil();
     if (!etat.profil) { afficherEcran(ecranConnexion); return; }
-    if (etat.profil.statut !== 'actif' || etat.profil.role !== 'livreur') {
-      await purgerEtDeconnecter("Ce compte n'est plus actif ou n'est pas un compte livreur. Les données locales ont été effacées.");
+    if (etat.profil.role !== 'livreur') {
+      await purgerEtDeconnecter("Ce matricule n'est pas un compte livreur. Cette application est réservée aux livreurs — utilisez le CRM (/management) pour les autres rôles.");
+      return;
+    }
+    if (etat.profil.statut !== 'actif') {
+      await purgerEtDeconnecter("Ce compte livreur est suspendu. Contactez votre responsable logistique. Les données de cet appareil ont été effacées par sécurité.");
       return;
     }
   }
@@ -118,8 +122,13 @@ async function purgerEtDeconnecter(message) {
   await supabase.auth.signOut();
   etat.profil = null;
   etat.cleChiffrement = null;
-  conteneur.innerHTML = `<div class="ecran"><div class="carte-app"><p>${message}</p>
-    <button class="gros-bouton gros-bouton-bleu" onclick="window.location.reload()">Retour à la connexion</button></div></div>`;
+  conteneur.innerHTML = `
+    <div class="ecran" style="justify-content:center; align-items:center; text-align:center;">
+      <div class="pin-icone-verrou">${icone('alertTriangle', 28)}</div>
+      <h2 style="margin:4px 0 10px;">Connexion requise</h2>
+      <div class="carte-app" style="text-align:left;"><p style="margin:0;">${message}</p></div>
+      <button class="gros-bouton gros-bouton-bleu" onclick="window.location.reload()">Retour à la connexion</button>
+    </div>`;
 }
 
 async function gererConnexionReussie() {
