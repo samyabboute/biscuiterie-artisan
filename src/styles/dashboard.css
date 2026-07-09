@@ -8,8 +8,14 @@
 .action-rapide:hover { text-decoration: none; box-shadow: var(--ombre-2); border-color: var(--gris-300); transform: translateY(-1px); }
 .action-rapide-icone { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--dore-teinte); color: var(--dore); flex-shrink: 0; }
 
+@keyframes entree-kpi { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
 .grille-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espace-4); margin-bottom: var(--espace-5); }
-.carte.kpi { display: flex; flex-direction: column; gap: 2px; }
+.carte.kpi { display: flex; flex-direction: column; gap: 2px; animation: entree-kpi 0.35s ease backwards; }
+.carte.kpi:nth-child(1) { animation-delay: 0.03s; }
+.carte.kpi:nth-child(2) { animation-delay: 0.08s; }
+.carte.kpi:nth-child(3) { animation-delay: 0.13s; }
+.carte.kpi:nth-child(4) { animation-delay: 0.18s; }
 .kpi-valeur { font-size: 1.7rem; font-weight: 800; color: var(--texte); letter-spacing: -0.02em; }
 .kpi-libelle { color: var(--texte-attenue); font-size: 0.83rem; }
 

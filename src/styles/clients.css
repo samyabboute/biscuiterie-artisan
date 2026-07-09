@@ -21,6 +21,9 @@ td.col-actions { white-space: nowrap; display: flex; gap: var(--espace-2); }
 td.col-actions button { font-size: 0.8rem; padding: var(--espace-1) var(--espace-2); }
 
 /* Fenêtre modale (fiche client) */
+@keyframes entree-fond-modale { from { opacity: 0; } to { opacity: 1; } }
+@keyframes entree-modale { from { opacity: 0; transform: translateY(14px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
 .fond-modale {
   position: fixed; inset: 0;
   background: rgba(20, 38, 74, 0.45);
@@ -28,6 +31,7 @@ td.col-actions button { font-size: 0.8rem; padding: var(--espace-1) var(--espace
   padding: var(--espace-6) var(--espace-4);
   overflow-y: auto;
   z-index: 50;
+  animation: entree-fond-modale 0.18s ease;
 }
 .modale {
   background: var(--surface);
@@ -35,6 +39,7 @@ td.col-actions button { font-size: 0.8rem; padding: var(--espace-1) var(--espace
   box-shadow: var(--ombre-forte);
   width: 100%; max-width: 760px;
   padding: var(--espace-6);
+  animation: entree-modale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .modale-entete { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--espace-5); }
 .modale-fermer { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--texte-attenue); }

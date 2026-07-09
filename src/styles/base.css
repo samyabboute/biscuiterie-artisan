@@ -105,6 +105,8 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; }
 .badge-bleu { background: var(--info-teinte); color: var(--vert-fonce); }
 .badge-gris { background: var(--gris-100); color: var(--texte-attenue); }
 
+@keyframes entree-message { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
 .message-erreur {
   background: var(--danger-teinte);
   color: var(--danger);
@@ -113,6 +115,7 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; }
   margin-bottom: var(--espace-4);
   font-size: 0.87rem;
   border: 1px solid rgba(196, 41, 31, 0.14);
+  animation: entree-message 0.22s ease;
 }
 
 .message-info {
@@ -123,6 +126,7 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; }
   margin-bottom: var(--espace-4);
   font-size: 0.87rem;
   border: 1px solid rgba(31, 56, 100, 0.1);
+  animation: entree-message 0.22s ease;
 }
 
 /* Phrase d'explication en tête de module — répond à "à quoi sert cette
@@ -146,10 +150,12 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; }
 }
 .etat-vide p { margin: 0; font-size: 0.9rem; }
 
+@keyframes entree-ligne { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
 table { border-collapse: collapse; width: 100%; }
 th, td { text-align: left; padding: 12px var(--espace-3); border-bottom: 1px solid var(--bordure); font-size: 0.86rem; }
 th { color: var(--gris-500); font-weight: 600; font-size: 0.71rem; text-transform: uppercase; letter-spacing: 0.05em; background: var(--gris-25); }
-tbody tr { transition: background var(--transition-rapide); }
+tbody tr { transition: background var(--transition-rapide); animation: entree-ligne 0.2s ease; }
 tbody tr:hover { background: var(--gris-50); }
 tbody tr:last-child td { border-bottom: none; }
 

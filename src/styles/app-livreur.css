@@ -21,7 +21,8 @@ body { min-height: 100vh; min-height: 100dvh; }
   }
 }
 
-.ecran { display: flex; flex-direction: column; flex: 1; padding: 16px; padding-bottom: 96px; }
+@keyframes entree-ecran { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.ecran { display: flex; flex-direction: column; flex: 1; padding: 16px; padding-bottom: 96px; animation: entree-ecran 0.25s ease; }
 
 .entete-app {
   display: flex; align-items: center; justify-content: space-between;

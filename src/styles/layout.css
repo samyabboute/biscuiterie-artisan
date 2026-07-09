@@ -84,7 +84,8 @@
 
 .bouton-icone-texte { display: inline-flex; align-items: center; gap: 7px; }
 
-.shell-contenu { padding: var(--espace-6); flex: 1; max-width: 1400px; width: 100%; margin: 0 auto; }
+@keyframes entree-contenu { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.shell-contenu { padding: var(--espace-6); flex: 1; max-width: 1400px; width: 100%; margin: 0 auto; animation: entree-contenu 0.28s ease; }
 
 @media (max-width: 900px) {
   .shell { grid-template-columns: 1fr; }
