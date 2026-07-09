@@ -16,12 +16,17 @@
 .carte-legende span { display: inline-flex; align-items: center; gap: 4px; }
 .carte-legende .pastille { width: 10px; height: 10px; border-radius: 50%; }
 
-.marqueur-pulse { width: 16px; height: 16px; border-radius: 50%; position: relative; border: 2px solid #fff; box-shadow: 0 0 4px rgba(0,0,0,0.4); }
-.marqueur-pulse::after {
-  content: ''; position: absolute; inset: -6px; border-radius: 50%; background: inherit;
-  opacity: 0.55; animation: pulse-carte 1.6s ease-out infinite;
+.marqueur-pulse {
+  width: 22px; height: 22px; border-radius: 50%; position: relative;
+  border: 3px solid #fff; box-shadow: 0 1px 6px rgba(0,0,0,0.45);
+  cursor: pointer; transition: transform 0.15s ease;
 }
-@keyframes pulse-carte { 0% { transform: scale(0.5); opacity: 0.6; } 100% { transform: scale(2); opacity: 0; } }
+.marqueur-pulse:hover { transform: scale(1.15); }
+.marqueur-pulse::after {
+  content: ''; position: absolute; inset: -8px; border-radius: 50%; background: inherit;
+  opacity: 0.6; animation: pulse-carte 1.5s ease-out infinite;
+}
+@keyframes pulse-carte { 0% { transform: scale(0.5); opacity: 0.7; } 100% { transform: scale(2.4); opacity: 0; } }
 .marqueur-orange { background: #C55A11; }
 .marqueur-bleu { background: #1F3864; }
 .marqueur-vert { background: #2E7D46; }
@@ -34,10 +39,16 @@
 }
 
 .marqueur-neutre {
-  width: 9px; height: 9px; border-radius: 50%;
-  background: var(--gris-400, #9AA1B2); border: 1.5px solid #fff; box-shadow: 0 0 3px rgba(0,0,0,0.35);
-  opacity: 0.85;
+  width: 14px; height: 14px; border-radius: 50%; position: relative;
+  background: var(--gris-400, #9AA1B2); border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+  cursor: pointer; transition: transform 0.15s ease;
 }
+.marqueur-neutre:hover { transform: scale(1.2); }
+.marqueur-neutre::after {
+  content: ''; position: absolute; inset: -5px; border-radius: 50%; background: inherit;
+  opacity: 0.5; animation: pulse-carte-neutre 2.2s ease-out infinite;
+}
+@keyframes pulse-carte-neutre { 0% { transform: scale(0.6); opacity: 0.45; } 100% { transform: scale(1.9); opacity: 0; } }
 
 .carte-stats {
   display: flex; gap: var(--espace-4); margin-left: auto; padding-left: var(--espace-4);
@@ -62,5 +73,8 @@
   position: absolute; top: 0; right: 0; bottom: 0; width: 340px; max-width: 90vw;
   background: var(--surface); box-shadow: -4px 0 12px rgba(0,0,0,0.15);
   z-index: 1100; padding: var(--espace-5); overflow-y: auto;
+  transform: translateX(100%); opacity: 0;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease;
 }
+.panneau-laterale-carte.visible { transform: translateX(0); opacity: 1; }
 .panneau-laterale-carte img { width: 100%; border-radius: var(--rayon-petit); margin-top: var(--espace-3); }

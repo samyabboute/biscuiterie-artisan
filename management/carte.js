@@ -168,7 +168,7 @@ function dessinerEtatVide(points, clientsSansCommande) {
 }
 
 function dessinerMarqueurClientNeutre(client) {
-  const icone = L.divIcon({ html: `<div class="marqueur-neutre"></div>`, className: '', iconSize: [9, 9] });
+  const icone = L.divIcon({ html: `<div class="marqueur-neutre"></div>`, className: '', iconSize: [14, 14] });
   const marqueur = L.marker([client.lat, client.lng], { icon: icone }).addTo(etat.couche);
   marqueur.on('click', () => ouvrirPanneauClientNeutre(client));
 }
@@ -194,9 +194,21 @@ function dessinerClusters(points) {
 }
 
 function dessinerMarqueurIndividuel(p) {
-  const icone = L.divIcon({ html: `<div class="marqueur-pulse marqueur-${p.statut}"></div>`, className: '', iconSize: [16, 16] });
+  const icone = L.divIcon({ html: `<div class="marqueur-pulse marqueur-${p.statut}"></div>`, className: '', iconSize: [22, 22] });
   const marqueur = L.marker([p.commande.lat, p.commande.lng], { icon: icone }).addTo(etat.couche);
   marqueur.on('click', () => ouvrirPanneau(p.commande));
+}
+
+// Insère le panneau et déclenche son animation d'entrée (glissement +
+// fondu) à la frame suivante ; la fermeture rejoue la même transition à
+// l'envers avant de retirer l'élément du DOM.
+function afficherPanneauAnime(panneau) {
+  document.body.appendChild(panneau);
+  requestAnimationFrame(() => panneau.classList.add('visible'));
+}
+function fermerPanneauAnime(panneau) {
+  panneau.classList.remove('visible');
+  panneau.addEventListener('transitionend', () => panneau.remove(), { once: true });
 }
 
 async function ouvrirPanneau(commande) {
@@ -226,8 +238,8 @@ async function ouvrirPanneau(commande) {
       ${urlPhoto ? `<img src="${urlPhoto}" alt="Preuve de livraison" />` : ''}
     ` : `<p style="color:var(--texte-attenue);">Pas encore livrée.</p>`}
   `;
-  document.body.appendChild(panneau);
-  panneau.querySelector('#fermer-panneau').addEventListener('click', () => panneau.remove());
+  afficherPanneauAnime(panneau);
+  panneau.querySelector('#fermer-panneau').addEventListener('click', () => fermerPanneauAnime(panneau));
 }
 
 function ouvrirPanneauClientNeutre(client) {
@@ -251,8 +263,8 @@ function ouvrirPanneauClientNeutre(client) {
       <a class="bouton bouton-secondaire" href="${base}management/clients.html?q=${encodeURIComponent(client.id_client)}">Voir la fiche client</a>
     </div>
   `;
-  document.body.appendChild(panneau);
-  panneau.querySelector('#fermer-panneau').addEventListener('click', () => panneau.remove());
+  afficherPanneauAnime(panneau);
+  panneau.querySelector('#fermer-panneau').addEventListener('click', () => fermerPanneauAnime(panneau));
 }
 
 function echapper(t) { const d = document.createElement('div'); d.textContent = t ?? ''; return d.innerHTML; }
