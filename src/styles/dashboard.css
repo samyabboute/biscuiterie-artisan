@@ -25,3 +25,57 @@
   .grille-deux { grid-template-columns: 1fr; }
   .actions-rapides { flex-direction: column; }
 }
+
+.guide-flux {
+  margin-bottom: var(--espace-5);
+  background: var(--surface);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre-1);
+  padding: 0 var(--espace-5);
+}
+.guide-flux summary {
+  list-style: none;
+  cursor: pointer;
+  padding: var(--espace-4) 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  color: var(--texte);
+  font-size: 0.95rem;
+}
+.guide-flux summary::-webkit-details-marker { display: none; }
+.guide-flux summary .guide-flux-icone-etat { color: var(--dore); transition: transform var(--transition); }
+.guide-flux[open] summary .guide-flux-icone-etat { transform: rotate(180deg); }
+.guide-flux-etapes {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  padding-bottom: var(--espace-5);
+  overflow-x: auto;
+}
+.guide-flux-etape {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  min-width: 120px;
+  flex: 1;
+}
+.guide-flux-etape-icone {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--dore-teinte); color: var(--vert-fonce);
+  flex-shrink: 0;
+}
+.guide-flux-etape-label { font-weight: 700; font-size: 0.83rem; color: var(--texte); }
+.guide-flux-etape-ou { font-size: 0.76rem; color: var(--texte-attenue); }
+.guide-flux-fleche { display: flex; align-items: center; justify-content: center; color: var(--gris-300); flex-shrink: 0; padding-top: 12px; }
+
+@media (max-width: 900px) {
+  .guide-flux-etapes { flex-direction: column; align-items: stretch; }
+  .guide-flux-etape { flex-direction: row; text-align: left; min-width: 0; }
+  .guide-flux-fleche { transform: rotate(90deg); padding: 0; align-self: center; }
+}

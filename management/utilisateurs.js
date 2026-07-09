@@ -26,6 +26,11 @@ if (profil) {
 
 async function demarrer(contenu) {
   contenu.innerHTML = `
+    <p class="page-explication">
+      Créez ici les comptes de votre équipe (matricule + mot de passe) et attribuez leur <strong>rôle</strong>
+      et leurs <strong>zones</strong> : cela détermine automatiquement ce qu'ils peuvent voir et faire dans
+      tout le reste du système.
+    </p>
     <div class="barre-outils">
       <input type="search" id="champ-recherche" placeholder="Rechercher (nom, matricule)..." />
       <select id="filtre-departement"><option value="">Tous les départements</option>

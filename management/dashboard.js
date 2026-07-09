@@ -17,6 +17,38 @@ const ACTIONS_RAPIDES = [
 const LIBELLES_MOTIF = { rupture: 'Rupture de stock', refus: 'Client refuse', ferme: 'Point fermé', dlc: 'DLC dépassée' };
 const JOURS_SANS_VISITE_SEUIL = 7;
 
+// Rappel visuel du cycle complet, affiché en haut de l'accueil : répond
+// directement à "je me sens perdu dans le système" en montrant d'un coup
+// d'œil où se situe chaque module dans le flux réel de travail.
+const ETAPES_FLUX = [
+  { icone: 'store', label: 'Client créé', ou: 'Clients' },
+  { icone: 'package', label: 'Commande validée', ou: 'Commandes' },
+  { icone: 'truck', label: 'Tournée assignée', ou: 'Tournées' },
+  { icone: 'mapPin', label: 'Livraison sur le terrain', ou: 'App livreur' },
+  { icone: 'wallet', label: 'Caisse & tableau de bord', ou: 'Encaissements' },
+];
+
+function dessinerGuideFlux() {
+  return `
+    <details class="guide-flux" open>
+      <summary>
+        <span style="display:flex; align-items:center; gap:8px;">${icone('map', 16)} Comment tout s'enchaîne — rappel du cycle complet</span>
+        <span class="guide-flux-icone-etat">${icone('chevronDown', 18)}</span>
+      </summary>
+      <div class="guide-flux-etapes">
+        ${ETAPES_FLUX.map((e, i) => `
+          <div class="guide-flux-etape">
+            <span class="guide-flux-etape-icone">${icone(e.icone, 18)}</span>
+            <span class="guide-flux-etape-label">${e.label}</span>
+            <span class="guide-flux-etape-ou">${e.ou}</span>
+          </div>
+          ${i < ETAPES_FLUX.length - 1 ? `<span class="guide-flux-fleche">${icone('chevronRight', 18)}</span>` : ''}
+        `).join('')}
+      </div>
+    </details>
+  `;
+}
+
 const profil = await exigerSession();
 if (profil) {
   const contenu = construireShell({ profil, moduleActifId: 'accueil' });
@@ -91,9 +123,22 @@ async function demarrer(contenu, profil) {
   // -------------------------------------------------- écarts par motif
   const parMotif = grouperCompter(l.filter((x) => x.motif_ecart), (x) => x.motif_ecart);
 
+  // -------------------------------------------------- tendance CA sur 7 jours
+  const ilY7Jours = new Date(Date.now() - 6 * 86400000).toISOString().slice(0, 10);
+  const { data: livraisons7j } = await supabase.from('v_livraisons_detail').select('date_commande, valeur_livree').gte('date_commande', ilY7Jours);
+  const caParJour = {};
+  for (let i = 6; i >= 0; i--) {
+    const jour = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+    caParJour[jour] = 0;
+  }
+  for (const x of livraisons7j || []) {
+    if (caParJour[x.date_commande] !== undefined) caParJour[x.date_commande] += Number(x.valeur_livree);
+  }
+
   const actionsVisibles = ACTIONS_RAPIDES.filter((a) => a.roles.includes(profil.role));
 
   contenu.innerHTML = `
+    ${dessinerGuideFlux()}
     ${actionsVisibles.length ? `
       <div class="actions-rapides">
         ${actionsVisibles.map((a) => `
@@ -109,6 +154,11 @@ async function demarrer(contenu, profil) {
       <div class="carte kpi"><div class="kpi-valeur">${caTotal.toLocaleString('fr-FR')} DA</div><div class="kpi-libelle">CA livré aujourd'hui</div></div>
       <div class="carte kpi"><div class="kpi-valeur">${encaisseReel.toLocaleString('fr-FR')} / ${attendu.toLocaleString('fr-FR')} DA</div><div class="kpi-libelle">Encaissé vs attendu</div></div>
       <div class="carte kpi"><div class="kpi-valeur">${clientsVisites.size} / ${clientsPlanifies.size}</div><div class="kpi-libelle">Points de vente visités / planifiés</div></div>
+    </div>
+
+    <div class="carte" style="margin-bottom: var(--espace-4);">
+      <h3>CA livré — 7 derniers jours</h3>
+      ${dessinerGraphiqueCA(caParJour)}
     </div>
 
     <div class="grille-deux">
@@ -156,6 +206,35 @@ async function demarrer(contenu, profil) {
       </div>
     </div>
   `;
+}
+
+// Graphique en barres du CA livré sur 7 jours — SVG dessiné à la main,
+// aucune librairie de graphique nécessaire pour un besoin aussi simple.
+function dessinerGraphiqueCA(caParJour) {
+  const entrees = Object.entries(caParJour);
+  const max = Math.max(...entrees.map(([, v]) => v), 1);
+  const largeurBarre = 60;
+  const espacement = 24;
+  const hauteur = 140;
+  const largeur = entrees.length * (largeurBarre + espacement);
+
+  const barres = entrees.map(([jour, valeur], i) => {
+    const h = Math.round((valeur / max) * (hauteur - 30));
+    const x = i * (largeurBarre + espacement) + espacement / 2;
+    const y = hauteur - h;
+    const jourLabel = new Date(jour).toLocaleDateString('fr-FR', { weekday: 'short' }).replace('.', '');
+    const estAujourdhui = jour === new Date().toISOString().slice(0, 10);
+    return `
+      <g>
+        <rect x="${x}" y="${y}" width="${largeurBarre}" height="${h}" rx="6"
+              fill="${estAujourdhui ? 'var(--dore)' : 'var(--vert-fonce)'}" opacity="${estAujourdhui ? 1 : 0.75}" />
+        <text x="${x + largeurBarre / 2}" y="${hauteur + 18}" text-anchor="middle" font-size="11" fill="var(--texte-attenue)">${jourLabel}</text>
+        <text x="${x + largeurBarre / 2}" y="${y - 6}" text-anchor="middle" font-size="10" font-weight="700" fill="var(--texte)">${valeur >= 1000 ? Math.round(valeur / 1000) + 'k' : valeur}</text>
+      </g>
+    `;
+  }).join('');
+
+  return `<svg viewBox="0 0 ${largeur} ${hauteur + 30}" style="width:100%; height:180px;">${barres}</svg>`;
 }
 
 function grouperSommer(lignes, cleFn, valeurFn) {

@@ -12,6 +12,10 @@ if (profil) {
 
 async function demarrer(contenu) {
   contenu.innerHTML = `
+    <p class="page-explication">
+      À la fin de chaque tournée, rapprochez ce que le livreur a réellement encaissé (espèces, chèque, crédit)
+      avec la valeur livrée. Un écart signale une erreur de caisse ou un impayé à suivre.
+    </p>
     <div class="barre-outils">
       <input type="date" id="filtre-date" value="${new Date().toISOString().slice(0, 10)}" />
       <select id="filtre-livreur"><option value="">Tous les livreurs</option></select>

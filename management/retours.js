@@ -23,6 +23,10 @@ if (profil) {
 
 async function demarrer(contenu) {
   contenu.innerHTML = `
+    <p class="page-explication">
+      Enregistrez ici un produit rendu par un client (défectueux, périmé, cassé). Une fois <strong>validé</strong>,
+      un avoir est appliqué automatiquement au solde du client.
+    </p>
     <div class="barre-outils">
       <select id="filtre-statut"><option value="">Tous les statuts</option>
         ${Object.entries(LIBELLES_STATUT).map(([v, l]) => `<option value="${v}">${l.texte}</option>`).join('')}

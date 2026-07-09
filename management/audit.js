@@ -16,6 +16,10 @@ if (profil) {
 
 async function demarrer(contenu) {
   contenu.innerHTML = `
+    <p class="page-explication">
+      Journal complet et infalsifiable de toutes les actions effectuées dans le système : qui a fait quoi,
+      quand, et depuis quel appareil. Utile pour retracer une erreur ou vérifier une action sensible.
+    </p>
     <div class="barre-outils">
       <select id="filtre-entite"><option value="">Toutes les entités</option>${ENTITES.map((e) => `<option value="${e}">${e}</option>`).join('')}</select>
       <input type="text" id="filtre-matricule" placeholder="Matricule (ex. ART-LIV-0001)" />

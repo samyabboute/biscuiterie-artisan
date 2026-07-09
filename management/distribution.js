@@ -16,6 +16,11 @@ async function demarrer(contenu) {
   const dataUrlQr = await QRCode.toDataURL(lienPwa, { width: 240, margin: 1 });
 
   contenu.innerHTML = `
+    <p class="page-explication">
+      Ici vous gérez l'équipe terrain : livreurs, leur QR d'installation de l'app mobile, et leur suivi de
+      synchronisation au quotidien. Un livreur doit d'abord exister ici avant de pouvoir se voir assigner une
+      tournée.
+    </p>
     <div class="carte carte-lien-pwa">
       <img src="${dataUrlQr}" alt="QR d'installation de l'app livreur" />
       <div>

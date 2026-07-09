@@ -23,6 +23,10 @@ if (profil) {
 
 async function demarrer(contenu) {
   contenu.innerHTML = `
+    <p class="page-explication">
+      Ici sont regroupés les éléments <strong>archivés</strong> (supprimés en douceur) des différents modules —
+      rien n'est jamais effacé définitivement, pour garder un historique complet.
+    </p>
     <div class="barre-outils">
       ${Object.entries(ENTITES).map(([id, e]) => `<button type="button" class="bouton bouton-secondaire" data-onglet="${id}" id="onglet-${id}">${e.libelle}</button>`).join('')}
       <div class="pousser"><button type="button" class="bouton bouton-primaire" id="bouton-export">Exporter CSV</button></div>

@@ -22,6 +22,10 @@ if (profil) {
 
 async function demarrer(contenu) {
   contenu.innerHTML = `
+    <p class="page-explication">
+      Créez une commande pour un client existant, puis validez-la (<strong>Brouillon → Validée</strong>) pour
+      qu'elle devienne disponible dans <strong>Tournées</strong> et puisse être assignée à un livreur.
+    </p>
     <div class="barre-outils">
       <select id="filtre-statut"><option value="">Tous les statuts</option>
         ${Object.entries(LIBELLES_STATUT).map(([v, l]) => `<option value="${v}">${l.texte}</option>`).join('')}

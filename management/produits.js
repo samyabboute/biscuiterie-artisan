@@ -16,6 +16,10 @@ if (profil) {
 
 async function demarrer(contenu) {
   contenu.innerHTML = `
+    <p class="page-explication">
+      Le catalogue produit : prix grossiste/détaillant, format carton et DLC. Ces références sont ensuite
+      utilisées dans les <strong>commandes</strong> et le <strong>chargement</strong> des tournées.
+    </p>
     <div class="barre-outils">
       <input type="search" id="champ-recherche" placeholder="Rechercher un produit..." />
       <div class="pousser">

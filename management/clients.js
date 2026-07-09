@@ -62,6 +62,11 @@ async function demarrer(contenu) {
 
 function gabaritPage() {
   return `
+    <p class="page-explication">
+      La fiche client centralise tout : coordonnées, zone, conditions de paiement et QR d'identification
+      terrain. Chaque nouveau client apparaît ensuite dans <strong>Commandes</strong> puis peut être ajouté
+      à une <strong>tournée</strong> pour être livré.
+    </p>
     <div class="barre-outils">
       <input type="search" id="champ-recherche" placeholder="Rechercher (nom, ID, gérant)..." />
       <select id="filtre-wilaya"><option value="">Toutes les wilayas</option></select>
