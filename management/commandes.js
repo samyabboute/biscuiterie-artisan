@@ -55,6 +55,15 @@ async function demarrer(contenu) {
   document.getElementById('filtre-date').addEventListener('change', chargerCommandes);
 
   await chargerCommandes();
+
+  // Arrivée depuis la fiche d'un client (ex. "+ Nouvelle commande pour ce
+  // client" sur la Carte ou dans Clients) : on ouvre directement le
+  // formulaire avec le client déjà sélectionné, sans étape supplémentaire.
+  const clientPreselectionne = new URLSearchParams(window.location.search).get('client');
+  if (clientPreselectionne) {
+    ouvrirFormulaire(clientPreselectionne);
+    window.history.replaceState({}, '', window.location.pathname);
+  }
 }
 
 async function chargerCommandes() {
@@ -149,7 +158,7 @@ async function afficherDetail(commande) {
 // ----------------------------------------------------------------------------
 // Nouvelle commande
 // ----------------------------------------------------------------------------
-function ouvrirFormulaire() {
+function ouvrirFormulaire(clientPreselectionne) {
   const lignesCourantes = [];
 
   const fond = document.createElement('div');
@@ -166,7 +175,7 @@ function ouvrirFormulaire() {
           <label>Client *</label>
           <select id="select-client" required>
             <option value="">—</option>
-            ${etat.clients.map((c) => `<option value="${c.id_client}">${c.raison_sociale} (${c.id_client})</option>`).join('')}
+            ${etat.clients.map((c) => `<option value="${c.id_client}" ${c.id_client === clientPreselectionne ? 'selected' : ''}>${c.raison_sociale} (${c.id_client})</option>`).join('')}
           </select>
         </div>
         <div class="champ">

@@ -57,6 +57,12 @@ async function demarrer(contenu) {
   document.getElementById('bouton-nouveau-client').addEventListener('click', () => ouvrirFormulaire(null));
   document.getElementById('bouton-export-planche').addEventListener('click', exporterPlancheSelection);
 
+  const rechercheInitiale = new URLSearchParams(window.location.search).get('q');
+  if (rechercheInitiale) {
+    document.getElementById('champ-recherche').value = rechercheInitiale;
+    etat.filtres.recherche = rechercheInitiale.trim();
+  }
+
   await chargerClients();
 }
 
@@ -406,13 +412,31 @@ async function archiverClient(client) {
 // ----------------------------------------------------------------------------
 // Fiche / QR
 // ----------------------------------------------------------------------------
+const LIBELLES_STATUT_COMMANDE = {
+  brouillon: { texte: 'Brouillon', classe: 'badge-gris' },
+  validee: { texte: 'Validée', classe: 'badge-bleu' },
+  en_tournee: { texte: 'En tournée', classe: 'badge-orange' },
+  livree: { texte: 'Livrée', classe: 'badge-vert' },
+  partielle: { texte: 'Partielle', classe: 'badge-orange' },
+  annulee: { texte: 'Annulée', classe: 'badge-rouge' },
+};
+
 async function afficherFicheEtQr(client) {
   const dataUrlQr = await QRCode.toDataURL(client.qr_token, { width: 400, margin: 1 });
+  const { data: commandes } = await supabase
+    .from('v_commandes_detail')
+    .select('id_commande, date_commande, statut, total')
+    .eq('client_id', client.id_client)
+    .order('date_commande', { ascending: false })
+    .limit(8);
+  const historique = commandes || [];
+  const livrees = historique.filter((c) => ['livree', 'partielle'].includes(c.statut));
+  const caLivre = livrees.reduce((s, c) => s + Number(c.total), 0);
 
   const fond = document.createElement('div');
   fond.className = 'fond-modale';
   fond.innerHTML = `
-    <div class="modale" style="max-width: 480px;">
+    <div class="modale" style="max-width: 560px;">
       <div class="modale-entete">
         <h2>${echapper(client.raison_sociale)}</h2>
         <button type="button" class="modale-fermer" id="fermer-fiche">✕</button>
@@ -424,6 +448,25 @@ async function afficherFicheEtQr(client) {
          ${client.conditions_paiement === 'credit' ? ` (plafond ${Number(client.plafond_credit).toLocaleString('fr-FR')} DA)` : ''}
          &nbsp; · &nbsp; <strong>Solde :</strong> ${Number(client.solde).toLocaleString('fr-FR')} DA</p>
 
+      <div class="grille-kpi" style="margin: var(--espace-4) 0;">
+        <div class="carte kpi"><div class="kpi-valeur">${historique.length}</div><div class="kpi-libelle">Commandes (8 dernières)</div></div>
+        <div class="carte kpi"><div class="kpi-valeur">${caLivre.toLocaleString('fr-FR')} DA</div><div class="kpi-libelle">CA livré</div></div>
+        <div class="carte kpi"><div class="kpi-valeur">${historique[0] ? historique[0].date_commande : '—'}</div><div class="kpi-libelle">Dernière commande</div></div>
+      </div>
+
+      <h3 style="margin-bottom: 8px;">Historique récent</h3>
+      ${historique.length === 0 ? `<p style="color:var(--texte-attenue);">Aucune commande enregistrée pour ce client pour l'instant.</p>` : `
+        <table>
+          <thead><tr><th>Commande</th><th>Date</th><th>Statut</th><th>Total</th></tr></thead>
+          <tbody>
+            ${historique.map((c) => {
+              const s = LIBELLES_STATUT_COMMANDE[c.statut] || { texte: c.statut, classe: 'badge-gris' };
+              return `<tr><td>${c.id_commande}</td><td>${c.date_commande}</td><td><span class="badge ${s.classe}">${s.texte}</span></td><td>${Number(c.total).toLocaleString('fr-FR')} DA</td></tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      `}
+
       <div class="panneau-qr">
         <img src="${dataUrlQr}" alt="QR code client" />
         <div class="id-client">${client.id_client}</div>
@@ -431,7 +474,8 @@ async function afficherFicheEtQr(client) {
 
       <div class="modale-actions">
         <button type="button" class="bouton bouton-secondaire" id="fermer-fiche-2">Fermer</button>
-        <button type="button" class="bouton bouton-primaire" id="telecharger-etiquette">Télécharger l'étiquette (PDF)</button>
+        <button type="button" class="bouton bouton-secondaire" id="telecharger-etiquette">Télécharger l'étiquette (PDF)</button>
+        <a class="bouton bouton-primaire" href="${import.meta.env.BASE_URL}management/commandes.html?client=${encodeURIComponent(client.id_client)}">+ Nouvelle commande pour ce client</a>
       </div>
     </div>
   `;

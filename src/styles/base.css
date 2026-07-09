@@ -44,6 +44,7 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; }
   cursor: pointer;
   transition: filter var(--transition-rapide), transform var(--transition-rapide), box-shadow var(--transition-rapide), background var(--transition-rapide);
   white-space: nowrap;
+  text-decoration: none;
 }
 .bouton:active:not(:disabled) { transform: translateY(1px); }
 .bouton:disabled { opacity: 0.5; cursor: not-allowed; }

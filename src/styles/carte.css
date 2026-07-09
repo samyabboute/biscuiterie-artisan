@@ -33,6 +33,31 @@
   font-weight: 800; font-size: 0.8rem; border: 2px solid #fff; box-shadow: 0 0 4px rgba(0,0,0,0.4);
 }
 
+.marqueur-neutre {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--gris-400, #9AA1B2); border: 1.5px solid #fff; box-shadow: 0 0 3px rgba(0,0,0,0.35);
+  opacity: 0.85;
+}
+
+.carte-stats {
+  display: flex; gap: var(--espace-4); margin-left: auto; padding-left: var(--espace-4);
+  border-left: 1px solid var(--bordure);
+}
+.carte-stats .stat { text-align: center; }
+.carte-stats .stat-valeur { font-size: 1.1rem; font-weight: 800; color: var(--texte); display: block; line-height: 1.1; }
+.carte-stats .stat-libelle { font-size: 0.65rem; color: var(--texte-attenue); text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
+
+.carte-etat-vide {
+  position: absolute; top: 70px; left: 50%; transform: translateX(-50%); z-index: 999;
+  background: var(--surface); border-radius: var(--rayon); box-shadow: var(--ombre);
+  padding: var(--espace-3) var(--espace-5); font-size: 0.85rem; color: var(--texte-attenue);
+  max-width: 420px; text-align: center;
+}
+
+@media (max-width: 900px) {
+  .carte-stats { margin-left: 0; padding-left: 0; border-left: none; width: 100%; justify-content: space-around; }
+}
+
 .panneau-laterale-carte {
   position: absolute; top: 0; right: 0; bottom: 0; width: 340px; max-width: 90vw;
   background: var(--surface); box-shadow: -4px 0 12px rgba(0,0,0,0.15);
