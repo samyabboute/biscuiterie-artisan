@@ -26,3 +26,8 @@
 .panneau-identifiants { background: #E4F3E8; border: 1px solid var(--succes); border-radius: var(--rayon-petit); padding: var(--espace-4); margin-bottom: var(--espace-4); }
 .panneau-identifiants .ligne { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.95rem; }
 .panneau-identifiants strong { font-family: monospace; font-size: 1.05rem; }
+
+@media (max-width: 560px) {
+  .carte-lien-pwa { flex-direction: column; text-align: center; }
+  .panneau-identifiants .ligne { flex-direction: column; gap: 2px; }
+}

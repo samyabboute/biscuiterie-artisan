@@ -50,6 +50,14 @@ td.col-actions button { font-size: 0.8rem; padding: var(--espace-1) var(--espace
 .jours-passage { display: flex; flex-wrap: wrap; gap: var(--espace-2); margin-bottom: var(--espace-4); }
 .jours-passage label { display: flex; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 500; }
 
+@media (max-width: 640px) {
+  .fond-modale { padding: 0; align-items: stretch; }
+  .modale { max-width: none; min-height: 100%; border-radius: 0; padding: var(--espace-4); }
+  .grille-champs { grid-template-columns: 1fr; }
+  .modale-actions { flex-wrap: wrap; }
+  .modale-actions .bouton { flex: 1 1 auto; }
+}
+
 .modale-actions { display: flex; justify-content: flex-end; gap: var(--espace-3); margin-top: var(--espace-5); }
 
 .panneau-qr { text-align: center; padding: var(--espace-5); }

@@ -9,6 +9,11 @@ html, body {
   background: var(--fond);
   color: var(--texte);
   -webkit-font-smoothing: antialiased;
+  /* Aucun scroll horizontal ne doit jamais atteindre le document lui-même :
+     les seuls éléments prévus pour défiler horizontalement (tableaux,
+     barre de navigation mobile) ont leur propre conteneur overflow-x:auto. */
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body { min-height: 100vh; }
