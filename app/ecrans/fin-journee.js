@@ -1,5 +1,6 @@
 import * as bd from '../../src/lib/pwa/db.js';
 import { synchroniser } from '../../src/lib/pwa/sync.js';
+import { icone } from '../../src/lib/icons.js';
 
 async function rendre(conteneur, { etat, naviguer, contexte }) {
   const operations = await bd.toutesLesOperations();
@@ -16,19 +17,21 @@ async function rendre(conteneur, { etat, naviguer, contexte }) {
   const totalEncaisse = encaissements.reduce((s, o) => s + (o.payload.mode !== 'credit' ? Number(o.payload.montant) : 0), 0);
   const totalCredit = encaissements.reduce((s, o) => s + (o.payload.mode === 'credit' ? Number(o.payload.montant) : 0), 0);
 
+  const entete = document.createElement('div');
+  entete.innerHTML = `<div class="entete-app"><span class="entete-icone">${icone('moon', 20)}</span><h1>Fin de journée</h1><span class="entete-espace"></span></div>`;
+
   const ecran = document.createElement('div');
   ecran.innerHTML = `
     <div class="ecran">
-      <h2 class="grand-titre">Fin de journée</h2>
-      <div class="carte-app">
-        <p><strong>Livraisons effectuées :</strong> ${livraisons.length}</p>
-        <p><strong>Nouvelles commandes :</strong> ${nouvellesCommandes.length}</p>
-        <p><strong>Nouveaux clients :</strong> ${nouveauxClients.length}</p>
-        <p><strong>Incidents :</strong> ${incidents.length}</p>
-        <p><strong>Encaissé (espèces/chèque) :</strong> ${totalEncaisse.toLocaleString('fr-FR')} DA</p>
-        <p><strong>Différé (crédit) :</strong> ${totalCredit.toLocaleString('fr-FR')} DA</p>
-        <p><strong>En attente d'envoi :</strong> ${enAttente.length} opération(s)</p>
+      <div class="grille-stats-app" style="margin-top:2px;">
+        <div class="stat-app"><div class="stat-app-icone">${icone('checkCircle', 16)}</div><div class="stat-app-valeur">${livraisons.length}</div><div class="stat-app-libelle">Livraisons effectuées</div></div>
+        <div class="stat-app"><div class="stat-app-icone">${icone('package', 16)}</div><div class="stat-app-valeur">${nouvellesCommandes.length}</div><div class="stat-app-libelle">Nouvelles commandes</div></div>
+        <div class="stat-app"><div class="stat-app-icone">${icone('store', 16)}</div><div class="stat-app-valeur">${nouveauxClients.length}</div><div class="stat-app-libelle">Nouveaux clients</div></div>
+        <div class="stat-app"><div class="stat-app-icone">${icone('alertTriangle', 16)}</div><div class="stat-app-valeur">${incidents.length}</div><div class="stat-app-libelle">Incidents</div></div>
+        <div class="stat-app"><div class="stat-app-icone">${icone('wallet', 16)}</div><div class="stat-app-valeur">${totalEncaisse.toLocaleString('fr-FR')}</div><div class="stat-app-libelle">Encaissé (DA)</div></div>
+        <div class="stat-app"><div class="stat-app-icone">${icone('sync', 16)}</div><div class="stat-app-valeur">${enAttente.length}</div><div class="stat-app-libelle">En attente d'envoi</div></div>
       </div>
+      ${totalCredit > 0 ? `<div class="carte-app"><strong>Différé (crédit) :</strong> ${totalCredit.toLocaleString('fr-FR')} DA</div>` : ''}
 
       <div class="carte-app" style="text-align:center;">
         <div class="sous-titre" style="margin:0;">Synchronisation avant 17h00</div>
@@ -36,10 +39,11 @@ async function rendre(conteneur, { etat, naviguer, contexte }) {
       </div>
 
       <div id="zone-resultat"></div>
-      <button class="gros-bouton gros-bouton-orange" id="btn-sync">Synchroniser maintenant</button>
+      <button class="gros-bouton gros-bouton-orange" id="btn-sync">${icone('sync', 20)}Synchroniser maintenant</button>
     </div>
   `;
   conteneur.innerHTML = '';
+  conteneur.appendChild(entete);
   conteneur.appendChild(ecran);
   conteneur.appendChild(contexte.afficherNavigation('fin-journee'));
 

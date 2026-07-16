@@ -1,15 +1,18 @@
 import * as bd from '../../src/lib/pwa/db.js';
+import { icone } from '../../src/lib/icons.js';
 
 async function rendre(conteneur, { etat, naviguer, contexte }) {
   const clients = await bd.tousLesClients(etat.cleChiffrement);
   const produits = (await bd.tousLesProduits()).filter((p) => p.statut === 'actif');
   const lignes = [];
 
+  const entete = document.createElement('div');
+  entete.innerHTML = `<div class="entete-app"><span class="entete-icone">${icone('package', 20)}</span><h1>Nouvelle commande</h1><span class="entete-espace"></span></div>`;
+
   const ecran = document.createElement('div');
   ecran.innerHTML = `
     <div class="ecran">
-      <h2 class="grand-titre">Prendre une commande</h2>
-      <p class="sous-titre">Pour une vente décidée sur place, hors de votre tournée planifiée. Elle sera envoyée au siège pour validation à la prochaine synchronisation.</p>
+      <p class="sous-titre" style="margin-top:2px;">Pour une vente décidée sur place, hors de votre tournée planifiée. Elle sera envoyée au siège pour validation à la prochaine synchronisation.</p>
       <div class="champ-app">
         <label>Client</label>
         <select id="select-client"><option value="">—</option>
@@ -30,6 +33,7 @@ async function rendre(conteneur, { etat, naviguer, contexte }) {
     </div>
   `;
   conteneur.innerHTML = '';
+  conteneur.appendChild(entete);
   conteneur.appendChild(ecran);
   conteneur.appendChild(contexte.afficherNavigation('nouvelle-commande'));
 
@@ -48,7 +52,7 @@ async function rendre(conteneur, { etat, naviguer, contexte }) {
       <div class="ligne-quantite">
         <span class="nom-produit">${l.designation} × ${l.quantite}</span>
         <span>${(l.quantite * l.prix_unitaire).toLocaleString('fr-FR')} DA</span>
-        <button type="button" data-retirer="${i}" style="margin-left:8px; background:none; border:none; font-size:1.2rem;">✕</button>
+        <button type="button" data-retirer="${i}" style="margin-left:8px; background:none; border:none; color:#B3261E; display:flex; align-items:center;">${icone('x', 16)}</button>
       </div>
     `).join('');
     conteneurLignes.querySelectorAll('[data-retirer]').forEach((b) => b.addEventListener('click', () => { lignes.splice(Number(b.dataset.retirer), 1); redessiner(); }));

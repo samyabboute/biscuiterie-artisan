@@ -1,9 +1,15 @@
 import * as bd from '../../src/lib/pwa/db.js';
+import { icone } from '../../src/lib/icons.js';
 
-const LIBELLES_STATUT = { a_faire: 'À faire', fait: '✓ Fait', reporte: 'Reporté' };
+const LIBELLES_STATUT = { a_faire: 'À faire', fait: 'Fait', reporte: 'Reporté' };
+const ICONES_STATUT = { a_faire: 'package', fait: 'checkCircle', reporte: 'alertTriangle' };
+
+function entete() {
+  return `<div class="entete-app"><span class="entete-icone">${icone('truck', 20)}</span><h1>Ma tournée</h1><span class="entete-espace"></span></div>`;
+}
 
 async function rendre(conteneur, { etat, naviguer, contexte }) {
-  conteneur.innerHTML = `<div class="ecran"><p>Chargement de la tournée...</p></div>`;
+  conteneur.innerHTML = `${entete()}<div class="ecran"><p>Chargement de la tournée...</p></div>`;
 
   const toutes = await bd.toutesLesTournees();
   const aujourdHui = new Date().toISOString().slice(0, 10);
@@ -14,12 +20,14 @@ async function rendre(conteneur, { etat, naviguer, contexte }) {
 
   if (!tournee) {
     ecran.innerHTML = `
-      <h2 class="grand-titre">Ma tournée</h2>
-      <p class="sous-titre">${new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
-      <div class="carte-app"><p>Aucune tournée synchronisée pour aujourd'hui.</p></div>
-      <button class="gros-bouton gros-bouton-orange" id="bouton-sync">Synchroniser maintenant</button>
+      <p class="sous-titre" style="margin-top:2px;">${new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
+      <div class="etat-vide-app">
+        <div class="icone-cercle">${icone('truck', 26)}</div>
+        <p>Aucune tournée synchronisée pour aujourd'hui. Synchronisez pour récupérer vos arrêts du jour.</p>
+      </div>
+      <button class="gros-bouton gros-bouton-orange" id="bouton-sync">${icone('sync', 20)}Synchroniser maintenant</button>
     `;
-    conteneur.innerHTML = '';
+    conteneur.innerHTML = entete();
     conteneur.appendChild(ecran);
     conteneur.appendChild(contexte.afficherNavigation('tournee'));
     document.getElementById('bouton-sync').addEventListener('click', async (evenement) => {
@@ -42,11 +50,10 @@ async function rendre(conteneur, { etat, naviguer, contexte }) {
   const arrets = [...(tournee.tournee_arrets || [])].sort((a, b) => a.ordre - b.ordre);
 
   ecran.innerHTML = `
-    <h2 class="grand-titre">Ma tournée</h2>
-    <p class="sous-titre">${tournee.id_tournee} — ${arrets.length} arrêt(s)</p>
+    <p class="sous-titre" style="margin-top:2px;">${tournee.id_tournee} — ${arrets.length} arrêt(s)</p>
     <div id="liste-arrets"></div>
   `;
-  conteneur.innerHTML = '';
+  conteneur.innerHTML = entete();
   conteneur.appendChild(ecran);
   conteneur.appendChild(contexte.afficherNavigation('tournee'));
 
@@ -59,11 +66,13 @@ async function rendre(conteneur, { etat, naviguer, contexte }) {
           <div class="numero">${i + 1}</div>
           <div class="infos" data-ouvrir="${a.id}">
             <div class="nom">${client?.raison_sociale || a.commande_id}</div>
-            <div class="sous">${a.commande_id} — ${LIBELLES_STATUT[a.statut] || a.statut}</div>
+            <div class="sous">${a.commande_id}
+              <span class="badge-arret badge-arret-${a.statut}">${icone(ICONES_STATUT[a.statut] || 'package', 12)}${LIBELLES_STATUT[a.statut] || a.statut}</span>
+            </div>
           </div>
           <div class="fleches">
-            <button type="button" data-monter="${i}" ${i === 0 ? 'disabled' : ''}>▲</button>
-            <button type="button" data-descendre="${i}" ${i === arrets.length - 1 ? 'disabled' : ''}>▼</button>
+            <button type="button" data-monter="${i}" ${i === 0 ? 'disabled' : ''}>${icone('chevronUp', 16)}</button>
+            <button type="button" data-descendre="${i}" ${i === arrets.length - 1 ? 'disabled' : ''}>${icone('chevronDown', 16)}</button>
           </div>
         </div>
       `;

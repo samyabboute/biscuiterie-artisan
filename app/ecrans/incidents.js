@@ -1,17 +1,21 @@
 import * as bd from '../../src/lib/pwa/db.js';
 import { compresserPhoto } from '../../src/lib/pwa/photo.js';
+import { icone } from '../../src/lib/icons.js';
 
 const LIBELLES_TYPE = { casse: 'Casse', avarie: 'Avarie', litige: 'Litige', vehicule: 'Véhicule' };
+const ICONES_TYPE = { casse: 'alertTriangle', avarie: 'alertTriangle', litige: 'fileText', vehicule: 'truck' };
 
 async function rendre(conteneur, { etat, naviguer, contexte }) {
   const clients = await bd.tousLesClients(etat.cleChiffrement);
 
+  const entete = document.createElement('div');
+  entete.innerHTML = `<div class="entete-app"><span class="entete-icone">${icone('alertTriangle', 20)}</span><h1>Signaler un incident</h1><span class="entete-espace"></span></div>`;
+
   const ecran = document.createElement('div');
   ecran.innerHTML = `
     <div class="ecran">
-      <h2 class="grand-titre">Signaler un incident</h2>
-      <div class="motif-grille" id="grille-type">
-        ${Object.entries(LIBELLES_TYPE).map(([v, l]) => `<button type="button" class="motif-bouton" data-type="${v}">${l}</button>`).join('')}
+      <div class="motif-grille" id="grille-type" style="margin-top:2px;">
+        ${Object.entries(LIBELLES_TYPE).map(([v, l]) => `<button type="button" class="motif-bouton" data-type="${v}">${icone(ICONES_TYPE[v], 18)}<br/>${l}</button>`).join('')}
       </div>
       <div class="champ-app">
         <label>Client concerné (optionnel)</label>
@@ -27,6 +31,7 @@ async function rendre(conteneur, { etat, naviguer, contexte }) {
     </div>
   `;
   conteneur.innerHTML = '';
+  conteneur.appendChild(entete);
   conteneur.appendChild(ecran);
   conteneur.appendChild(contexte.afficherNavigation('incidents'));
 

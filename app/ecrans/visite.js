@@ -51,7 +51,7 @@ function etapeSuivante(conteneur, etat, naviguer) {
 function dessinerArrivee(conteneur, etat, naviguer, visite) {
   const client = visite.client;
   conteneur.innerHTML = `
-    <div class="entete-app"><button class="retour" id="btn-retour">←</button><h1>Arrivée client</h1><span></span></div>
+    <div class="entete-app"><button class="retour" id="btn-retour">${icone('chevronLeft', 20)}</button><h1>Arrivée client</h1><span class="entete-espace"></span></div>
     <div class="ecran">
       ${indicateurEtapes('arrivee')}
       <div class="carte-app">
@@ -125,7 +125,7 @@ function dessinerLivraison(conteneur, etat, naviguer, visite) {
   }
 
   conteneur.innerHTML = `
-    <div class="entete-app"><span></span><h1>Livraison</h1><span></span></div>
+    <div class="entete-app"><span class="entete-espace"></span><h1>Livraison</h1><span class="entete-espace"></span></div>
     <div class="ecran">
       ${indicateurEtapes('livraison')}
       <p class="sous-titre">Ajustez les quantités réellement livrées.</p>
@@ -192,7 +192,7 @@ async function dessinerPreuve(conteneur, etat, naviguer, visite) {
   if (!visite.numeroBL) visite.numeroBL = await prochainNumeroBL(etat.profil.matricule);
 
   conteneur.innerHTML = `
-    <div class="entete-app"><span></span><h1>Preuve de livraison</h1><span></span></div>
+    <div class="entete-app"><span class="entete-espace"></span><h1>Preuve de livraison</h1><span class="entete-espace"></span></div>
     <div class="ecran">
       ${indicateurEtapes('preuve')}
       <div class="carte-app" style="text-align:center;">
@@ -249,7 +249,7 @@ function dessinerEncaissement(conteneur, etat, naviguer, visite) {
   const total = lignes.reduce((s, l) => s + (visite.quantitesLivrees[l.produit_reference] || 0) * l.prix_unitaire, 0);
 
   conteneur.innerHTML = `
-    <div class="entete-app"><span></span><h1>Encaissement</h1><span></span></div>
+    <div class="entete-app"><span class="entete-espace"></span><h1>Paiement</h1><span class="entete-espace"></span></div>
     <div class="ecran">
       ${indicateurEtapes('encaissement')}
       <div class="carte-app" style="text-align:center;">

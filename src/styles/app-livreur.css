@@ -25,38 +25,45 @@ body { min-height: 100vh; min-height: 100dvh; }
 .ecran { display: flex; flex-direction: column; flex: 1; padding: 16px; padding-bottom: 96px; animation: entree-ecran 0.25s ease; }
 
 .entete-app {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
   background: linear-gradient(135deg, var(--vert-fonce) 0%, var(--vert-fonce-fonce) 100%);
   color: #fff; padding: 16px; padding-top: calc(16px + env(safe-area-inset-top));
   position: sticky; top: 0; z-index: 10;
-  box-shadow: 0 2px 10px rgba(20, 38, 74, 0.25);
+  box-shadow: 0 4px 16px rgba(20, 38, 74, 0.3);
+  border-radius: 0 0 18px 18px;
 }
-.entete-app h1 { color: #fff; margin: 0; font-size: 1.15rem; font-weight: 800; }
+.entete-app h1 { color: #fff; margin: 0; font-size: 1.12rem; font-weight: 800; flex: 1; letter-spacing: -0.01em; }
 .entete-app .retour {
-  background: rgba(255,255,255,0.12); border: none; color: #fff; font-size: 1.3rem;
-  width: 38px; height: 38px; border-radius: 10px; cursor: pointer;
+  background: rgba(255,255,255,0.14); border: none; color: #fff; font-size: 1.3rem;
+  width: 38px; height: 38px; border-radius: 11px; cursor: pointer; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
+  transition: background 0.12s ease;
 }
-.entete-app .retour:active { background: rgba(255,255,255,0.22); }
+.entete-app .retour:active { background: rgba(255,255,255,0.24); }
+.entete-icone {
+  width: 38px; height: 38px; border-radius: 11px; background: rgba(255,255,255,0.14);
+  color: var(--dore-clair, #D8C48B); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.entete-espace { width: 38px; flex-shrink: 0; }
 
 .gros-bouton {
   display: flex; align-items: center; justify-content: center; gap: 10px;
   width: 100%; min-height: 62px; border: none; border-radius: 14px;
   font-size: 1.15rem; font-weight: 800; cursor: pointer; margin-bottom: 12px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.16);
-  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.12s ease;
 }
-.gros-bouton:active { transform: scale(0.97); box-shadow: 0 1px 3px rgba(0,0,0,0.16); }
-.gros-bouton-orange { background: var(--dore); color: #fff; }
-.gros-bouton-bleu { background: var(--vert-fonce); color: #fff; }
-.gros-bouton-vert { background: #1E7B3D; color: #fff; }
-.gros-bouton-rouge { background: #B3261E; color: #fff; }
+.gros-bouton:active { transform: scale(0.97); box-shadow: 0 1px 3px rgba(0,0,0,0.16); filter: brightness(0.96); }
+.gros-bouton-orange { background: linear-gradient(135deg, var(--dore-clair, #c99a3f) 0%, var(--dore) 55%, var(--dore-fonce) 100%); color: #fff; }
+.gros-bouton-bleu { background: linear-gradient(135deg, var(--vert-fonce-clair, #4A7340) 0%, var(--vert-fonce) 60%, var(--vert-fonce-fonce) 100%); color: #fff; }
+.gros-bouton-vert { background: linear-gradient(135deg, #2FA157 0%, #1E7B3D 100%); color: #fff; }
+.gros-bouton-rouge { background: linear-gradient(135deg, #D3453B 0%, #B3261E 100%); color: #fff; }
 .gros-bouton-blanc { background: #fff; color: var(--vert-fonce); border: 2px solid var(--vert-fonce); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
 .gros-bouton:disabled { opacity: 0.45; box-shadow: none; }
 
 .carte-app {
-  background: #fff; border-radius: 14px; padding: 18px; margin-bottom: 14px;
-  box-shadow: 0 2px 6px rgba(16, 20, 31, 0.08); border: 1px solid #DEE2EA;
+  background: #fff; border-radius: 16px; padding: 18px; margin-bottom: 14px;
+  box-shadow: 0 3px 10px rgba(16, 20, 31, 0.07), 0 1px 2px rgba(16,20,31,0.06); border: 1px solid #EBEDF2;
 }
 
 .champ-app { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
@@ -69,30 +76,74 @@ body { min-height: 100vh; min-height: 100dvh; }
 .pastille-navigation {
   position: fixed; bottom: 0; left: 0; right: 0; background: #fff;
   border-top: 1px solid #E2E5EC; display: flex; z-index: 20;
-  padding-bottom: env(safe-area-inset-bottom);
-  box-shadow: 0 -2px 10px rgba(16, 20, 31, 0.06);
+  padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 16px rgba(16, 20, 31, 0.08);
 }
 .pastille-navigation button {
-  flex: 1; background: none; border: none; padding: 9px 4px 8px; font-size: 0.7rem;
-  font-weight: 700; color: #8B93A5; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  flex: 1; background: none; border: none; padding: 7px 2px; font-size: 0.68rem; margin: 0 2px;
+  font-weight: 700; color: #9099AB; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  border-radius: 12px; transition: background 0.12s ease, color 0.12s ease;
 }
-.pastille-navigation button.actif { color: var(--dore); }
+.pastille-navigation button .icone { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; }
+.pastille-navigation button.actif { color: var(--dore-fonce); background: var(--dore-teinte, #F6EFDD); }
 .pastille-navigation button:active { background: #F4F5F8; }
 
 .arret-carte {
-  display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 14px;
-  padding: 14px; margin-bottom: 10px; border: 1px solid #DEE2EA; box-shadow: 0 1px 4px rgba(16, 20, 31, 0.06);
+  display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 16px;
+  padding: 14px; margin-bottom: 10px; border: 1px solid #EBEDF2; box-shadow: 0 2px 6px rgba(16, 20, 31, 0.05);
+  transition: box-shadow 0.12s ease, transform 0.08s ease;
 }
-.arret-carte .numero { width: 34px; height: 34px; border-radius: 50%; background: var(--vert-fonce); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
+.arret-carte:active { transform: scale(0.99); }
+.arret-carte .numero {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--vert-fonce-clair, #4A7340) 0%, var(--vert-fonce) 100%);
+  color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800;
+  box-shadow: 0 2px 5px rgba(48, 77, 43, 0.35);
+}
 .arret-carte .infos { flex: 1; min-width: 0; }
 .arret-carte .infos .nom { font-weight: 800; font-size: 1.02rem; }
-.arret-carte .infos .sous { color: #6B7385; font-size: 0.85rem; }
+.arret-carte .infos .sous { color: #6B7385; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; margin-top: 2px; }
 .arret-carte .fleches { display: flex; flex-direction: column; gap: 3px; }
-.arret-carte .fleches button { background: #EDEFF3; border: none; border-radius: 7px; width: 32px; height: 28px; font-size: 0.95rem; }
+.arret-carte .fleches button {
+  background: #F1F2F6; border: none; border-radius: 8px; width: 32px; height: 28px;
+  display: flex; align-items: center; justify-content: center; color: #6B7385;
+}
 .arret-carte .fleches button:active { background: #DDE1E9; }
+.arret-carte .fleches button:disabled { opacity: 0.35; }
 
-.grand-titre { font-size: 1.45rem; font-weight: 900; color: var(--vert-fonce); margin: 0 0 4px; }
+.badge-arret { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; font-size: 0.78rem; padding: 2px 8px; border-radius: 20px; }
+.badge-arret-a_faire { background: #EEF1F6; color: #6B7385; }
+.badge-arret-fait { background: rgba(30, 123, 61, 0.12); color: #1E7B3D; }
+.badge-arret-reporte { background: rgba(166, 129, 46, 0.14); color: var(--dore-fonce); }
+
+.grand-titre { font-size: 1.45rem; font-weight: 900; color: var(--vert-fonce); margin: 0 0 4px; letter-spacing: -0.02em; }
 .sous-titre { color: #6B7385; margin: 0 0 16px; }
+
+/* État vide illustré (icône + message + action) — remplace un simple texte
+   "Aucune tournée" qui donnait l'impression que l'app ne fait rien. */
+.etat-vide-app {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 36px 20px; margin-bottom: 14px;
+}
+.etat-vide-app .icone-cercle {
+  width: 64px; height: 64px; border-radius: 50%; margin-bottom: 14px;
+  background: var(--dore-teinte, #F6EFDD); color: var(--dore-fonce);
+  display: flex; align-items: center; justify-content: center;
+}
+.etat-vide-app p { margin: 0; color: #6B7385; font-size: 0.92rem; max-width: 260px; }
+
+/* Grille de statistiques (fin de journée) — remplace la liste de <p> brute. */
+.grille-stats-app { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.stat-app {
+  background: #fff; border-radius: 14px; padding: 14px; border: 1px solid #EBEDF2;
+  box-shadow: 0 2px 6px rgba(16, 20, 31, 0.05); display: flex; flex-direction: column; gap: 6px;
+}
+.stat-app .stat-app-icone {
+  width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+  background: var(--dore-teinte, #F6EFDD); color: var(--dore-fonce);
+}
+.stat-app .stat-app-valeur { font-size: 1.3rem; font-weight: 900; color: var(--vert-fonce); letter-spacing: -0.02em; }
+.stat-app .stat-app-libelle { font-size: 0.76rem; color: #6B7385; font-weight: 600; }
 
 .ligne-quantite { display: flex; align-items: center; justify-content: space-between; background: #fff; border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; border: 1px solid #DEE2EA; }
 .ligne-quantite .nom-produit { font-weight: 700; flex: 1; }
@@ -115,12 +166,23 @@ canvas.pad-signature { width: 100%; height: 200px; background: #fff; border: 2px
 .compte-a-rebours.rouge { color: #B3261E; }
 
 .pave-numerique { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 300px; margin: 0 auto; }
-.pave-numerique button { min-height: 62px; font-size: 1.5rem; font-weight: 800; border-radius: 12px; border: none; background: #fff; box-shadow: 0 1px 4px rgba(16, 20, 31, 0.1); color: var(--vert-fonce); }
-.pave-numerique button:active { background: #EEF0F4; }
+.pave-numerique button {
+  min-height: 62px; font-size: 1.5rem; font-weight: 800; border-radius: 14px; border: none;
+  background: #fff; box-shadow: 0 2px 6px rgba(16, 20, 31, 0.09); color: var(--vert-fonce);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, color 0.08s ease;
+}
+.pave-numerique button:active { background: #fff; transform: scale(0.94); box-shadow: 0 1px 2px rgba(16,20,31,0.1); color: var(--dore); }
 .points-pin { display: flex; justify-content: center; gap: 14px; margin: 20px 0; }
-.points-pin span { width: 16px; height: 16px; border-radius: 50%; background: #D3D8E2; transition: background 0.15s ease; }
-.points-pin span.rempli { background: var(--vert-fonce); }
-.pin-icone-verrou { color: var(--vert-fonce); background: #EEF1F6; width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+.points-pin span {
+  width: 16px; height: 16px; border-radius: 50%; background: #D3D8E2; display: inline-block;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.points-pin span.rempli { background: linear-gradient(135deg, var(--vert-fonce-clair, #4A7340), var(--vert-fonce)); transform: scale(1.15); }
+.pin-icone-verrou {
+  color: var(--vert-fonce); background: var(--dore-teinte, #F6EFDD); width: 64px; height: 64px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 6px;
+  box-shadow: 0 4px 14px rgba(48, 77, 43, 0.15);
+}
 
 /* Repère "étape X sur 4" du parcours de visite client */
 .indicateur-etapes { display: flex; align-items: center; margin-bottom: 18px; }

@@ -7,11 +7,13 @@ const LIBELLES_TYPE = { GRO: 'Grossiste', SUP: 'Supérette', GMS: 'Grande surfac
 async function rendre(conteneur, { etat, naviguer, contexte }) {
   const wilayas = await bd.toutesLesWilayas();
 
+  const entete = document.createElement('div');
+  entete.innerHTML = `<div class="entete-app"><span class="entete-icone">${icone('store', 20)}</span><h1>Nouveau client</h1><span class="entete-espace"></span></div>`;
+
   const ecran = document.createElement('div');
   ecran.innerHTML = `
     <div class="ecran">
-      <h2 class="grand-titre">Nouveau client</h2>
-      <p class="sous-titre">La fiche sera envoyée en attente de validation par le siège.</p>
+      <p class="sous-titre" style="margin-top:2px;">La fiche sera envoyée en attente de validation par le siège.</p>
       <div class="champ-app"><label>Raison sociale *</label><input id="raison_sociale" required /></div>
       <div class="champ-app"><label>Type *</label><select id="type_client">${Object.entries(LIBELLES_TYPE).map(([v, l]) => `<option value="${v}">${l}</option>`).join('')}</select></div>
       <div class="champ-app"><label>Gérant</label><input id="gerant" /></div>
@@ -25,6 +27,7 @@ async function rendre(conteneur, { etat, naviguer, contexte }) {
     </div>
   `;
   conteneur.innerHTML = '';
+  conteneur.appendChild(entete);
   conteneur.appendChild(ecran);
   conteneur.appendChild(contexte.afficherNavigation('nouveau-client'));
 
