@@ -1,5 +1,5 @@
 import { exigerSession } from '../src/lib/auth.js';
-import { construireShell } from '../src/lib/layout.js';
+import { construireShell, chargeurLogo } from '../src/lib/layout.js';
 import { supabase } from '../src/lib/supabaseClient.js';
 
 const ENTITES = {
@@ -32,7 +32,7 @@ async function demarrer(contenu) {
       <div class="pousser"><button type="button" class="bouton bouton-primaire" id="bouton-export">Exporter CSV</button></div>
     </div>
     <div class="carte tableau-clients-conteneur">
-      <table><thead id="entete-tableau"></thead><tbody id="corps-tableau"><tr><td>Chargement...</td></tr></tbody></table>
+      <table><thead id="entete-tableau"></thead><tbody id="corps-tableau"><tr><td>${chargeurLogo('Chargement...', true)}</td></tr></tbody></table>
     </div>
   `;
 
@@ -50,7 +50,7 @@ async function charger() {
   document.getElementById('entete-tableau').innerHTML = `<tr>${config.colonnes.map((c) => `<th>${c}</th>`).join('')}<th>Actions</th></tr>`;
 
   const corps = document.getElementById('corps-tableau');
-  corps.innerHTML = `<tr><td colspan="${config.colonnes.length + 1}">Chargement...</td></tr>`;
+  corps.innerHTML = `<tr><td colspan="${config.colonnes.length + 1}">${chargeurLogo('Chargement...', true)}</td></tr>`;
 
   const { data, error } = await supabase.from(config.table).select('*').eq('statut', 'archive').order('date_creation', { ascending: false });
   if (error) { corps.innerHTML = `<tr><td colspan="${config.colonnes.length + 1}"><div class="message-erreur">${error.message}</div></td></tr>`; return; }

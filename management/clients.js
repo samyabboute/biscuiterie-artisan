@@ -1,5 +1,5 @@
 import { exigerSession } from '../src/lib/auth.js';
-import { construireShell } from '../src/lib/layout.js';
+import { construireShell, chargeurLogo } from '../src/lib/layout.js';
 import { supabase } from '../src/lib/supabaseClient.js';
 import QRCode from 'qrcode';
 import { jsPDF } from 'jspdf';
@@ -98,7 +98,7 @@ function gabaritPage() {
           </tr>
         </thead>
         <tbody id="corps-tableau">
-          <tr><td colspan="9">Chargement...</td></tr>
+          <tr><td colspan="9">${chargeurLogo('Chargement...', true)}</td></tr>
         </tbody>
       </table>
     </div>
@@ -136,7 +136,7 @@ function remplirFiltreStatut() {
 
 async function chargerClients() {
   const corps = document.getElementById('corps-tableau');
-  corps.innerHTML = `<tr><td colspan="9">Chargement...</td></tr>`;
+  corps.innerHTML = `<tr><td colspan="9">${chargeurLogo('Chargement...', true)}</td></tr>`;
 
   let requete = supabase.from('clients').select('*').order('date_creation', { ascending: false });
   if (etat.filtres.wilaya) requete = requete.eq('wilaya', etat.filtres.wilaya);

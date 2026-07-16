@@ -1,5 +1,5 @@
 import { exigerSession } from '../src/lib/auth.js';
-import { construireShell } from '../src/lib/layout.js';
+import { construireShell, chargeurLogo } from '../src/lib/layout.js';
 import { supabase } from '../src/lib/supabaseClient.js';
 import { icone } from '../src/lib/icons.js';
 
@@ -56,7 +56,7 @@ if (profil) {
 }
 
 async function demarrer(contenu, profil) {
-  contenu.innerHTML = `<p>Chargement des indicateurs...</p>`;
+  contenu.innerHTML = chargeurLogo('Chargement des indicateurs...');
   const aujourdHui = new Date().toISOString().slice(0, 10);
 
   const [

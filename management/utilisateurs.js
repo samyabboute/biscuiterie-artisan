@@ -1,5 +1,5 @@
 import { exigerSession } from '../src/lib/auth.js';
-import { construireShell } from '../src/lib/layout.js';
+import { construireShell, chargeurLogo } from '../src/lib/layout.js';
 import { supabase } from '../src/lib/supabaseClient.js';
 
 const DEPARTEMENTS = { DIR: 'Direction', COM: 'Commercial', LOG: 'Logistique', ADV: 'ADV', FIN: 'Finance', DEP: 'Dépôt', LIV: 'Livraison' };
@@ -43,7 +43,7 @@ async function demarrer(contenu) {
     <div class="carte tableau-clients-conteneur">
       <table>
         <thead><tr><th>Matricule</th><th>Nom</th><th>Département</th><th>Rôle</th><th>Zones</th><th>Statut</th><th>Actions</th></tr></thead>
-        <tbody id="corps-tableau"><tr><td colspan="7">Chargement...</td></tr></tbody>
+        <tbody id="corps-tableau"><tr><td colspan="7">${chargeurLogo('Chargement...', true)}</td></tr></tbody>
       </table>
     </div>
   `;

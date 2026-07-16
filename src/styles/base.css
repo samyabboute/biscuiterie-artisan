@@ -174,6 +174,23 @@ tbody tr:last-child td { border-bottom: none; }
 }
 @keyframes squelette-anim { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
 
+/* Chargeur de marque — anneau doré tournant autour du logo qui respire.
+   Utilisé partout où l'app attend une réponse serveur. */
+.chargeur-logo { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--espace-3); padding: var(--espace-7) var(--espace-4); }
+.chargeur-logo-anneau {
+  position: relative; width: 62px; height: 62px; border-radius: 50%;
+  border: 3px solid var(--dore-teinte); border-top-color: var(--dore);
+  display: flex; align-items: center; justify-content: center;
+  animation: chargeur-rotation 0.85s linear infinite;
+}
+.chargeur-logo-anneau img { width: 60%; height: 60%; object-fit: contain; animation: chargeur-respiration 1.7s ease-in-out infinite; }
+.chargeur-logo-texte { font-size: 0.85rem; color: var(--texte-attenue); font-weight: 600; }
+.chargeur-logo-compact { flex-direction: row; padding: var(--espace-3); gap: var(--espace-2); }
+.chargeur-logo-compact .chargeur-logo-anneau { width: 26px; height: 26px; border-width: 2.5px; }
+.chargeur-logo-compact .chargeur-logo-texte { font-size: 0.83rem; }
+@keyframes chargeur-rotation { to { transform: rotate(360deg); } }
+@keyframes chargeur-respiration { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.88); opacity: 0.7; } }
+
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--gris-300); border-radius: 999px; }

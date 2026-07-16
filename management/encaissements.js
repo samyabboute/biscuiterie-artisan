@@ -1,5 +1,5 @@
 import { exigerSession } from '../src/lib/auth.js';
-import { construireShell } from '../src/lib/layout.js';
+import { construireShell, chargeurLogo } from '../src/lib/layout.js';
 import { supabase } from '../src/lib/supabaseClient.js';
 
 const LIBELLES_MODE = { especes: 'Espèces', cheque: 'Chèque', credit: 'Crédit' };
@@ -25,7 +25,7 @@ async function demarrer(contenu) {
       <h3 style="margin-top:0;">Rapprochement de caisse par livreur</h3>
       <table>
         <thead><tr><th>Livreur</th><th>Attendu (livré)</th><th>Encaissé</th><th>Écart</th><th>Espèces</th><th>Chèque</th><th>Crédit différé</th></tr></thead>
-        <tbody id="corps-rapprochement"><tr><td colspan="7">Chargement...</td></tr></tbody>
+        <tbody id="corps-rapprochement"><tr><td colspan="7">${chargeurLogo('Chargement...', true)}</td></tr></tbody>
       </table>
     </div>
 
@@ -33,7 +33,7 @@ async function demarrer(contenu) {
       <h3 style="margin-top:0;">Alertes plafond crédit</h3>
       <table>
         <thead><tr><th>Client</th><th>Solde</th><th>Plafond</th><th>Dépassement</th></tr></thead>
-        <tbody id="corps-alertes"><tr><td colspan="4">Chargement...</td></tr></tbody>
+        <tbody id="corps-alertes"><tr><td colspan="4">${chargeurLogo('Chargement...', true)}</td></tr></tbody>
       </table>
     </div>
   `;

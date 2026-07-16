@@ -64,11 +64,24 @@ const GROUPES = [
 ];
 const MODULES = GROUPES.flatMap((g) => g.modules);
 
+// Indicateur de chargement à l'image de marque (anneau doré tournant autour
+// du logo qui respire) — remplace les textes "Chargement..." bruts qui ne
+// donnaient aucune impression de produit soigné.
+export function chargeurLogo(texte = 'Chargement...', compact = false) {
+  return `
+    <div class="chargeur-logo ${compact ? 'chargeur-logo-compact' : ''}">
+      <span class="chargeur-logo-anneau"><img src="${import.meta.env.BASE_URL}logo-icone.png" alt="" /></span>
+      ${texte ? `<span class="chargeur-logo-texte">${texte}</span>` : ''}
+    </div>
+  `;
+}
+
 export function construireShell({ profil, moduleActifId }) {
   const racine = document.createElement('div');
   racine.className = 'shell';
   racine.innerHTML = `
-    <aside class="shell-barre-laterale">
+    <div class="shell-fond-tiroir" id="shell-fond-tiroir"></div>
+    <aside class="shell-barre-laterale" id="shell-barre-laterale">
       <div class="shell-logo">
         <span class="shell-logo-marque"><img src="${import.meta.env.BASE_URL}logo-icone.png" alt="Logo Biscuiterie L'Artisan" /></span>
         <span class="shell-logo-texte">
@@ -80,7 +93,10 @@ export function construireShell({ profil, moduleActifId }) {
     </aside>
     <div class="shell-corps">
       <header class="shell-entete">
-        <div class="shell-entete-titre"></div>
+        <div class="shell-entete-gauche">
+          <button type="button" class="shell-bouton-menu" id="shell-bouton-menu" aria-label="Ouvrir le menu">${icone('menu', 22)}</button>
+          <div class="shell-entete-titre"></div>
+        </div>
         <div class="shell-entete-profil">
           <div class="shell-profil-avatar">${(profil.prenom?.[0] || '') + (profil.nom?.[0] || '')}</div>
           <div class="shell-profil-info">
@@ -120,6 +136,18 @@ export function construireShell({ profil, moduleActifId }) {
     await deconnecter();
     window.location.href = `${import.meta.env.BASE_URL}management/login.html`;
   });
+
+  // Tiroir de navigation mobile : la barre latérale se cache hors-écran et
+  // s'ouvre par-dessus le contenu (comme les grands produits SaaS) au lieu
+  // de s'écraser en un bandeau du haut qui rongeait l'espace vertical.
+  const barreLaterale = racine.querySelector('#shell-barre-laterale');
+  const fondTiroir = racine.querySelector('#shell-fond-tiroir');
+  const boutonMenu = racine.querySelector('#shell-bouton-menu');
+  const ouvrirTiroir = () => { barreLaterale.classList.add('ouverte'); fondTiroir.classList.add('visible'); document.body.classList.add('tiroir-ouvert'); };
+  const fermerTiroir = () => { barreLaterale.classList.remove('ouverte'); fondTiroir.classList.remove('visible'); document.body.classList.remove('tiroir-ouvert'); };
+  boutonMenu.addEventListener('click', ouvrirTiroir);
+  fondTiroir.addEventListener('click', fermerTiroir);
+  nav.querySelectorAll('a').forEach((lien) => lien.addEventListener('click', fermerTiroir));
 
   document.body.innerHTML = '';
   document.body.appendChild(racine);

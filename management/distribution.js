@@ -1,5 +1,5 @@
 import { exigerSession } from '../src/lib/auth.js';
-import { construireShell } from '../src/lib/layout.js';
+import { construireShell, chargeurLogo } from '../src/lib/layout.js';
 import { supabase } from '../src/lib/supabaseClient.js';
 import QRCode from 'qrcode';
 
@@ -45,7 +45,7 @@ async function demarrer(contenu) {
             <th>Statut</th><th>Synchro (17h00)</th><th>Actions</th>
           </tr>
         </thead>
-        <tbody id="corps-tableau"><tr><td colspan="7">Chargement...</td></tr></tbody>
+        <tbody id="corps-tableau"><tr><td colspan="7">${chargeurLogo('Chargement...', true)}</td></tr></tbody>
       </table>
     </div>
   `;

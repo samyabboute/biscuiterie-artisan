@@ -1,5 +1,5 @@
 import { exigerSession } from '../src/lib/auth.js';
-import { construireShell } from '../src/lib/layout.js';
+import { construireShell, chargeurLogo } from '../src/lib/layout.js';
 import { supabase } from '../src/lib/supabaseClient.js';
 
 const LIBELLES_STATUT = {
@@ -36,7 +36,7 @@ async function demarrer(contenu) {
     <div class="carte tableau-clients-conteneur">
       <table>
         <thead><tr><th>Tournée</th><th>Livreur</th><th>Date</th><th>Statut</th><th>Commandes assignées</th><th>Chargement</th><th>Actions</th></tr></thead>
-        <tbody id="corps-tableau"><tr><td colspan="7">Chargement...</td></tr></tbody>
+        <tbody id="corps-tableau"><tr><td colspan="7">${chargeurLogo('Chargement...', true)}</td></tr></tbody>
       </table>
     </div>
   `;
@@ -176,7 +176,7 @@ function ouvrirConstructeur() {
     const conteneur = fond.querySelector('#liste-disponibles');
     if (!livreur) { conteneur.innerHTML = '<em>Choisissez un livreur pour voir ses commandes.</em>'; return; }
 
-    conteneur.innerHTML = 'Chargement...';
+    conteneur.innerHTML = chargeurLogo('Chargement...', true);
     const { data: assignees } = await supabase.from('tournee_arrets').select('commande_id');
     const idsDejaAssignes = new Set((assignees || []).map((a) => a.commande_id));
 

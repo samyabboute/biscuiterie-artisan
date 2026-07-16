@@ -68,7 +68,21 @@
   z-index: 5;
   min-height: 60px;
 }
-.shell-entete-titre h1 { margin: 0; font-size: 1.15rem; letter-spacing: -0.01em; }
+.shell-entete-gauche { display: flex; align-items: center; gap: var(--espace-3); min-width: 0; }
+.shell-entete-titre h1 { margin: 0; font-size: 1.15rem; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.shell-bouton-menu {
+  display: none; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: var(--rayon-petit); border: 1px solid var(--bordure);
+  background: var(--surface); color: var(--texte); cursor: pointer; flex-shrink: 0;
+}
+.shell-bouton-menu:active { background: var(--gris-50); }
+
+.shell-fond-tiroir {
+  display: none; position: fixed; inset: 0; background: rgba(16, 20, 31, 0.45);
+  z-index: 150; opacity: 0; pointer-events: none; transition: opacity 0.22s ease;
+}
+.shell-fond-tiroir.visible { opacity: 1; pointer-events: auto; }
 
 .shell-entete-profil { display: flex; align-items: center; gap: var(--espace-3); }
 .shell-profil-avatar {
@@ -89,17 +103,26 @@
 
 @media (max-width: 900px) {
   .shell { grid-template-columns: 1fr; }
-  .shell-barre-laterale { flex-direction: row; flex-wrap: wrap; align-items: center; padding: var(--espace-2) var(--espace-3); position: static; height: auto; gap: var(--espace-2); }
-  .shell-nav { flex-direction: row; flex-wrap: wrap; gap: 2px; }
-  .shell-nav-groupe-titre { display: none; }
-  .shell-logo { display: none; }
+
+  /* La barre latérale devient un tiroir plein-hauteur caché hors-écran par
+     défaut (translateX) et glisse par-dessus le contenu à l'ouverture — le
+     schéma standard des produits SaaS "grand compte", au lieu d'un bandeau
+     du haut qui mangeait tout l'espace vertical. */
+  .shell-barre-laterale {
+    position: fixed; top: 0; left: 0; height: 100vh; width: 280px; max-width: 82vw;
+    transform: translateX(-100%); transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 200; box-shadow: 4px 0 24px rgba(16, 20, 31, 0.18);
+  }
+  .shell-barre-laterale.ouverte { transform: translateX(0); }
+  .shell-fond-tiroir { display: block; }
+  .shell-bouton-menu { display: flex; }
   .shell-profil-info { display: none; }
-  .shell-nav-item { padding: 6px 9px; font-size: 0.8rem; }
   .shell-entete { padding: var(--espace-3) var(--espace-4); }
   .shell-contenu { padding: var(--espace-4); }
+  body.tiroir-ouvert { overflow: hidden; }
 }
 
 @media (max-width: 480px) {
-  .shell-entete-titre h1 { font-size: 1rem; }
+  .shell-entete-titre h1 { font-size: 1rem; max-width: 140px; }
   .shell-profil-nom { display: none; }
 }
